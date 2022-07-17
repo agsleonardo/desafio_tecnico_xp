@@ -1,0 +1,20 @@
+{
+  "name": "desafio_tecnico_xp",
+  "version": "1.0.0",
+  "description": "Este projeto foi desenvolvido para etapa de Desafio Técnico do processo seletivo dos alunos da Turma XP da Trybe.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agsleonardo/desafio_tecnico_xp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agsleonardo/desafio_tecnico_xp/issues"
+  },
+  "homepage": "https://github.com/agsleonardo/desafio_tecnico_xp#readme"
+}
