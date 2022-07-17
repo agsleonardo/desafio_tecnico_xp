@@ -37,8 +37,7 @@ uma vez que cada um estava em uma pasta. Encontrei uma biblioteca para fazer a g
 dos comandos assincronamente.
 
 - Realizar um projeto estruturado em microserviços (e ainda funciona como o esperado). Este é o primeiro :D.
-<br>
-<br>
+
 # Rodando localmente
 
 Instale as dependências, na pasta raiz.
