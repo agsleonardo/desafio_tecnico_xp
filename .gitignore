@@ -1,1 +1,7 @@
 node_modules
+anotacoes.txt
+auth/node_modules
+accounts/node_modules
+custom/node_modules
+wallet/node_modules
+orders/node_modules
