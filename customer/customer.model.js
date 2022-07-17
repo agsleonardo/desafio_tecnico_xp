@@ -8,4 +8,17 @@ const connection = mysql.createPool({
   database: process.env.MYSQL_DATABASE || 'customer',
 });
 
-module.exports = connection;
+const getById = async (id) => {
+  const [[rows]] = await connection.query('SELECT * FROM customer WHERE id = ?', [id]);
+  return rows;
+};
+
+const create = async ({ email, username, password }) => {
+  const [[rows]] = await connection.query('INSERT INTO customer (email, username, password) VALUES (?, ?, ?)', [email, username, password]);
+  return rows;
+};
+
+module.exports = {
+  getById,
+  create,
+};
