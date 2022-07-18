@@ -1,0 +1,53 @@
+version: "3.8"
+services:
+  # auth:
+  #   container_name: auth
+  #   build: ./auth
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - mongo
+  customer:
+    container_name: customer
+    build: ./customer
+    ports:
+      - 4000:4000
+    depends_on:
+      - customer_db
+    command: "node server.js"
+    environment:
+      - MYSQL_HOST=customer_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+  customer_db:
+    image: mysql
+    container_name: customer_db
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  # order:
+  #   build: ./order
+  #   ports:
+  #     - "5000:5000"
+  #   depends_on:
+  #     - mongo
+  #     - book
+  #     - customer
+  # wallet:
+  #   build: ./wallet
+  #   ports:
+  #     - "6000:6000"
+  #   depends_on:
+  #     - mongo
+  #     - book
+  #     - customer
+  # account:
+  #   build: ./account
+  #   ports:
+  #     - "7000:7000"
+  #   depends_on:
+  #     - mongo
+  #     - book
+  #     - customer
+

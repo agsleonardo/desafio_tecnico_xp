@@ -4,6 +4,7 @@
   "description": "Este projeto foi desenvolvido para etapa de Desafio Técnico do processo seletivo dos alunos da Turma XP da Trybe.",
   "main": "index.js",
   "scripts": {
+    "start": "concurrently \"cd customer && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/agsleonardo/desafio_tecnico_xp/issues"
   },
-  "homepage": "https://github.com/agsleonardo/desafio_tecnico_xp#readme"
+  "homepage": "https://github.com/agsleonardo/desafio_tecnico_xp#readme",
+  "dependencies": {
+    "concurrently": "^7.2.2"
+  }
 }
