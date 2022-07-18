@@ -1,0 +1,115 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Desafio XP - API Cliente",
+    "description": "Esta API fornece informações sobre clientes e provê sua autenticação.",
+    "contact": {
+      "email": "agsleonardo@hotmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000/v1",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Cadastro de clientes.",
+        "description": "Esta rota será responsável pelo cadastro de clientes.",
+        "tags": ["Clientes"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignUp"
+              },
+              "examples": {
+                "Cliente": {
+                  "value": {
+                    "email": "agsleonardo@hotmail.com",
+                    "username": "agsleonardo",
+                    "password": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/SignUpSuccess"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login de clientes.",
+        "description": "Esta rota será responsável pelo cadastro de clientes.",
+        "tags": ["Clientes"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginSuccess"
+              },
+              "examples": {
+                "Cliente": {
+                  "value": {
+                    "email": "agsleonardo@hotmail.com",
+                    "password": "123456"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components":{
+    "schemas": {
+      "SignUp": {
+        "type":"object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "SignUpSuccess": {
+        "type":"object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginSuccess": {
+        "type":"object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
