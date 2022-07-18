@@ -9,7 +9,8 @@ const create = async (req, res) => {
   const { email, username, password } = req.body;
   const passwordHash = await bcrypt.hash(password, 10);
   const customer = await customerModel.create(email, username, passwordHash);
-  res.json(customer);
+  if (!customer) throw new Error('Usuário não cadastrado! Verifique os dados e tente novamente.');
+  res.json({ message: 'Cliente criado com sucesso' });
 };
 
 const getById = async (req, res) => {
