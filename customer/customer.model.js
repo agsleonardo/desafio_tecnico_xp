@@ -27,7 +27,7 @@ const recreateDatabase = async () => {
 };
 
 const getById = async (id) => {
-  const [[rows]] = await connection.query('SELECT * FROM Customer_db.Customer WHERE id = ?', [id]);
+  const [[rows]] = await connection.query('SELECT id, email, username FROM Customer_db.Customer WHERE id = ?', [id]);
   return rows;
 };
 
