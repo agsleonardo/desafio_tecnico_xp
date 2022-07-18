@@ -31,7 +31,12 @@ const getById = async (id) => {
   return rows;
 };
 
-const create = async ({ email, username, password }) => {
+const getByEmail = async (email) => {
+  const [[rows]] = await connection.query('SELECT * FROM Customer_db.Customer WHERE email = ?', [email]);
+  return rows;
+};
+
+const create = async (email, username, password) => {
   const [{ insertId }] = await connection.query('INSERT INTO Customer_db.Customer (email, username, password) VALUES (?, ?, ?)', [email, username, password]);
   return insertId;
 };
@@ -39,5 +44,6 @@ const create = async ({ email, username, password }) => {
 module.exports = {
   getById,
   create,
+  getByEmail,
   recreateDatabase,
 };
