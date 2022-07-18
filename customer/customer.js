@@ -23,7 +23,6 @@ const login = async (req, res) => {
   const customer = await customerModel.getByEmail(email);
   if (!customer) throw new Error('Usuário ou senha inválidos');
   const isAuth = await bcrypt.compare(password, customer.password);
-  console.log(customer);
   if (!isAuth) throw new Error('Usuário ou senha inválidos');
   const token = jwt.sign({
     id: customer.id,
