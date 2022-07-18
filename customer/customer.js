@@ -10,13 +10,13 @@ const create = async (req, res) => {
   const passwordHash = await bcrypt.hash(password, 10);
   const customer = await customerModel.create(email, username, passwordHash);
   if (!customer) throw new Error('Usuário não cadastrado! Verifique os dados e tente novamente.');
-  res.json({ message: 'Cliente criado com sucesso' });
+  res.status(200).send({ message: 'Cliente criado com sucesso' });
 };
 
 const getById = async (req, res) => {
   const { id } = req.params;
   const customer = await customerModel.getById(id);
-  res.json(customer);
+  res.status(200).send(customer);
 };
 
 const login = async (req, res) => {
@@ -30,7 +30,7 @@ const login = async (req, res) => {
     email: customer.email,
     username: customer.username,
   }, secret, { expiresIn: '1h' });
-  return res.json({ token });
+  return res.status(200).send({ token });
 };
 
 module.exports = {
