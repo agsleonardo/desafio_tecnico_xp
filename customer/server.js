@@ -21,4 +21,4 @@ app.use((err, _req, res, next) => {
 });
 
 model.recreateDatabase();
-app.listen(PORT, () => process.stdout.write(`Customer on port ${PORT}`));
+app.listen(PORT, () => process.stdout.write(`\nCustomer on port ${PORT}\n`));
