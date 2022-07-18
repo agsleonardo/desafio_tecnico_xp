@@ -1,6 +1,9 @@
 const express = require('express');
 require('express-async-errors');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./swagger.json');
+
 const model = require('./customer.model');
 
 const app = express();
@@ -10,7 +13,8 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
-app.use(routes);
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/v1', routes);
 
 app.use((err, _req, res, next) => {
   if (err) {
