@@ -16,7 +16,16 @@ const withdraw = async (req, res) => {
   res.status(200).send({ message: `Saque realizado com sucesso! Novo saldo: R$ ${newBalance.toFixed(2)}` });
 };
 
+const deposit = async (req, res) => {
+  const { accountId, amount } = req.body;
+  const accountData = await model.getByAccountId(accountId);
+  const newBalance = +accountData.balance + +amount;
+  await model.updateBalance(accountId, newBalance);
+  res.status(200).send({ message: `Depósito realizado com sucesso! Novo saldo: R$ ${newBalance.toFixed(2)}` });
+};
+
 module.exports = {
   getByAccountId,
   withdraw,
+  deposit,
 };
