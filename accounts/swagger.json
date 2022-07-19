@@ -63,7 +63,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/definitions/SignUpPayloadOk"
+                  "$ref": "#/definitions/AccountPayloadOk"
                 }
               }
             }
@@ -71,12 +71,12 @@
         }
       }
     },
-    "/": {
-      "post": {
+    "/withdraw": {
+      "put": {
         "tags": [
           "contas"
         ],
-        "summary": "Cadastra um novo cliente",
+        "summary": "Realiza um saque na conta de um cliente",
         "description": "",
         "consumes": [
           "application/json"
@@ -84,28 +84,17 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SignUpPayloadModel"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/SignUpPayloadOExample"
+                "$ref": "#/definitions/AccountPayloadExample"
               },
               "examples": {
                 "cliente": {
                   "value": {
-                    "username": "Leonardo",
-                    "email": "agsleonardo@hotmail.com",
-                    "password": "1234"
+                    "accountId": "1",
+                    "amount": "40"
                  }
                 }
               }
@@ -119,7 +108,18 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/definitions/SignUpPayloadOk"
+                  "$ref": "#/definitions/AccountPayloadOk"
+                }
+              }
+            }
+          },
+          "404": {
+            "description":"Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/AccountPayloadOk"
                 }
               }
             }
@@ -130,7 +130,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/definitions/SignUpPayloadOk"
+                  "$ref": "#/definitions/AccountPayloadOk"
                 }
               }
             }
@@ -138,12 +138,12 @@
         }
       }
     },
-    "/login": {
-      "post": {
+    "/deposit": {
+      "put": {
         "tags": [
           "contas"
         ],
-        "summary": "Autentica o cliente",
+        "summary": "Realiza um depósito na conta de um cliente",
         "description": "",
         "consumes": [
           "application/json"
@@ -151,27 +151,17 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LoginPayload"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/LoginPayload"
+                "$ref": "#/definitions/AccountPayloadExample"
               },
               "examples": {
                 "cliente": {
                   "value": {
-                    "email": "nara@gmail.com",
-                    "password": "1234"
+                    "accountId": "1",
+                    "amount": "40"
                  }
                 }
               }
@@ -185,7 +175,18 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/definitions/LoginOk"
+                  "$ref": "#/definitions/AccountPayloadOk"
+                }
+              }
+            }
+          },
+          "404": {
+            "description":"Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/AccountPayloadOk"
                 }
               }
             }
@@ -196,7 +197,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/definitions/SignUpPayloadOk"
+                  "$ref": "#/definitions/AccountPayloadOk"
                 }
               }
             }
@@ -206,7 +207,18 @@
     }
   },
   "definitions": {
-    "SignUpPayloadModel": {
+    "AccountPayload": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "integer"
+        },
+        "amount": {
+          "type": "integer"
+        }
+      }
+    },
+    "AccountPayloadExample": {
       "type": "object",
       "properties": {
         "email": {
@@ -220,21 +232,7 @@
         }
       }
     },
-    "SignUpPayloadOExample": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "username": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        }
-      }
-    },
-    "SignUpPayloadOk": {
+    "AccountPayloadOk": {
       "type": "object",
       "properties": {
         "message": {
