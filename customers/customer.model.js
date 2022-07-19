@@ -26,7 +26,7 @@ async function recreateDatabase() {
     return '\nDatabase inciado...\n';
   } catch (error) {
     process.stdout.write(`\nFalha em restaurar o Banco. ${error}\n`);
-    return recreateDatabase();
+    return setTimeout(() => recreateDatabase(), 1000);
   }
 }
 

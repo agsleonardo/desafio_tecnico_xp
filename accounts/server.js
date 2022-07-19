@@ -4,7 +4,7 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const logger = require('morgan');
 const swaggerDocs = require('./swagger.json');
-// const model = require('./accounts.model');
+const model = require('./accounts.model');
 const router = require('./accounts.routes');
 
 const app = express();
@@ -25,5 +25,5 @@ app.use((err, _req, res, next) => {
   next();
 });
 
-// model.recreateDatabase();
+model.recreateDatabase();
 app.listen(PORT, () => process.stdout.write(`\nAccounts on port ${PORT}\n`));
