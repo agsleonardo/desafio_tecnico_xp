@@ -31,7 +31,7 @@ const geyByAccountId = async (accountId) => {
   return rows;
 };
 
-exports.module = {
+module.exports = {
   recreateDatabase,
   geyByAccountId,
 };
