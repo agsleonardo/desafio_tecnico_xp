@@ -7,4 +7,4 @@ CREATE TABLE IF NOT EXISTS Customer_db.Customer (
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
-INSERT INTO Customer_db.Customer VALUES (1,'nara@gmail.com','nara','1234');
+INSERT INTO Customer_db.Customer VALUES (1,'nara@gmail.com','nara','$2b$10$yoKRyYymJ8nuZLPAOHn3xufKpXOYk2/DH7nabTbLDn/cSlU6yJISq');

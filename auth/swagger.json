@@ -1,0 +1,55 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Esta API fornece informações sobre o cliente e o autentica.",
+    "version": "1.0.0",
+    "title": "Desafio XP - API auth",
+    "contact": {
+      "email": "agsleonardo@hotmail.com"
+    }
+  },
+  "basePath": "/v1",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "auth"
+        ],
+        "summary": "Valida a requisição ao endpoint.",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description":"OK"
+          },
+          "401": {
+            "description":"Unauthorized"
+          }
+        }
+      }
+    }
+  }
+}
