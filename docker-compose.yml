@@ -1,6 +1,16 @@
 version: "3.8"
 services:
 
+  proxy:
+    container_name: proxy
+    build: ./
+    ports:
+      - 10000:10000
+    environment:
+      AUTH_URL: 'http://auth:3000'
+      CUSTOMER_URL: 'http://customers:4000'
+      ACCOUNTS_URL: 'http://accounts:5000'
+
   auth:
     container_name: auth
     build: ./auth
@@ -31,6 +41,10 @@ services:
       - "5000:5000"
     depends_on:
       - accounts_db
+    environment:
+      - MYSQL_HOST=accounts_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
 
   accounts_db:
     image: mysql
