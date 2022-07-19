@@ -2,6 +2,7 @@ const express = require('express');
 require('express-async-errors');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
+const logger = require('morgan');
 const swaggerDocs = require('./swagger.json');
 
 const model = require('./customer.model');
@@ -9,6 +10,7 @@ const model = require('./customer.model');
 const app = express();
 const routes = require('./customer.routes');
 
+app.use(logger('dev'));
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
