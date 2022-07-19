@@ -19,4 +19,4 @@ app.use((err, _req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => process.stdout.write(`Auth on port ${PORT}`));
+app.listen(PORT, () => process.stdout.write(`\nAuth on port ${PORT}\n`));
