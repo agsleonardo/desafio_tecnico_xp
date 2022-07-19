@@ -46,6 +46,17 @@
               }
             }
           },
+          "404": {
+            "description":"Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/CustomerByIdNotFound"
+                }
+              }
+            }
+          },
           "500": {
             "description":"Internal Server Error",
             "content": {
@@ -234,13 +245,18 @@
     "CustomerById": {
       "type": "object",
       "properties": {
-        "id": {
+        "customerId": {
           "type": "integer"
         },
-        "email": {
-          "type": "string"
-        },
-        "username": {
+        "balance": {
+          "type": "integer"
+        }
+      }
+    },
+    "CustomerByIdNotFound": {
+      "type": "object",
+      "properties": {
+        "message": {
           "type": "string"
         }
       }
