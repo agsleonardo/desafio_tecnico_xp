@@ -1,8 +1,8 @@
 const express = require('express');
+const validateRequest = require('./auth');
 
 const router = express.Router();
 
-router.post('/', (req, res, next) => {
-  res.send('Auth');
-  next();
-});
+router.get('/', validateRequest);
+
+module.exports = router;
