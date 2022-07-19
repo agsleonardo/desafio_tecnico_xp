@@ -6,6 +6,12 @@ services:
     build: ./
     ports:
       - 10000:10000
+    depends_on:
+      - auth
+      - customers
+      - accounts
+      - customers_db
+      - accounts_db
     environment:
       AUTH_URL: 'http://auth:3000'
       CUSTOMER_URL: 'http://customers:4000'
@@ -29,14 +35,6 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
 
-  customers_db:
-    image: mysql
-    container_name: customers_db
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-
   accounts:
     build: ./accounts
     ports:
@@ -47,6 +45,14 @@ services:
       - MYSQL_HOST=accounts_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
+
+  customers_db:
+    image: mysql
+    container_name: customers_db
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
 
   accounts_db:
     image: mysql
