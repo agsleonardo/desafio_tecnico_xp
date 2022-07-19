@@ -1,12 +1,10 @@
 version: "3.8"
 services:
-  # auth:
-  #   container_name: auth
-  #   build: ./auth
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - mongo
+  auth:
+    container_name: auth
+    build: ./auth
+    ports:
+      - 3000:3000
   customer:
     container_name: customer
     build: ./customer
@@ -14,7 +12,6 @@ services:
       - 4000:4000
     depends_on:
       - customer_db
-    command: "node server.js"
     environment:
       - MYSQL_HOST=customer_db
       - MYSQL_USER=root
