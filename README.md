@@ -38,6 +38,10 @@ dos comandos assincronamente.
 
 - Realizar um projeto estruturado em microserviços (e ainda funciona como o esperado). Este é o primeiro :D.
 
+- Nunca havia lidado com Swagger. Foi muito bom conhecer a ferramenta e explorar suas funcionalidades. Realmente, ajuda muito com a documentação, para futuras manutenções e para consulta para construção do frontend.
+
+- Nunca havia lidado com proxys em node, apenas middlewares de validação. Achei sensacional e experiência de conhecer e implementar um proxy como API Gateway para correto roteamento das requisições e integração dos microserviços.
+
 # Rodando localmente
 
 Instale as dependências, na pasta raiz.
