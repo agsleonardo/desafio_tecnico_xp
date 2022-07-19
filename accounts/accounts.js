@@ -13,7 +13,7 @@ const withdraw = async (req, res) => {
   if (+accountData.balance < +amount) throw customError(400, 'Saldo insuficiente');
   const newBalance = accountData.balance - amount;
   await model.updateBalance(accountId, newBalance);
-  res.status(200).send({message: `Saque realizado com sucesso! Novo saldo: ${newBalance}`});
+  res.status(200).send({ message: `Saque realizado com sucesso! Novo saldo: ${newBalance}` });
 };
 
 module.exports = {
