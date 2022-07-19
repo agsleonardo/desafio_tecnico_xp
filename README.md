@@ -32,6 +32,8 @@ onde eles são comuns, como nodemon, express e eslint por exemplo.
 
 - Poderia fazer apenas um método que atualiza o saldo do cliente e recebe a natureza da operação por parâmetro ao invés de escrever dois métodos diferentes e semelhantes. O código ficaria mais enxuto mas fiquei na dúvida se teria problemas com relação à manutenções futuras para entendimento de outros devs e também para escalar ou agregar novas coisas caso necessário teria que fazer muita adaptação e gambiarras.
 
+- Houve um problema de assincronismo na rotina para fazer a primeira carga do banco de dados. Resolvi realizar a carga através de uma função recursiva.
+
 # Aprendizados
 
 - Precisava de uma forma para colocar todos os servidores no ar ao mesmo tempo, 
