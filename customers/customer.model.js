@@ -11,7 +11,7 @@ const connection = mysql.createPool({
   password: process.env.MYSQL_PASSWORD || 'root',
 });
 
-const recreateDatabase = async () => {
+async function recreateDatabase() {
   try {
     const importPath = path.resolve(__dirname, 'customer.sql');
     const seedDBContent = fs.readFileSync(importPath).toString();
@@ -23,10 +23,12 @@ const recreateDatabase = async () => {
       .then(() => connection.query(createTable))
       .then(() => connection.query(inserts));
     process.stdout.write('\nDatabase inciado...\n');
+    return '\nDatabase inciado...\n';
   } catch (error) {
     process.stdout.write(`\nFalha em restaurar o Banco. ${error}\n`);
+    return recreateDatabase();
   }
-};
+}
 
 const getById = async (id) => {
   const [[rows]] = await connection.query('SELECT id, email, username FROM Customer_db.Customer WHERE id = ?', [id]);

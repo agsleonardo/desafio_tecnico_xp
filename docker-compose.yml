@@ -25,13 +25,15 @@ services:
     depends_on:
       - customers_db
     environment:
-      - MYSQL_HOST=customer_db
+      - MYSQL_HOST=customers_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
 
   customers_db:
     image: mysql
     container_name: customers_db
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
 
