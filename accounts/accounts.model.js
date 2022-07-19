@@ -12,20 +12,24 @@ const connection = mysql.createPool({
   password: process.env.MYSQL_PASSWORD || 'root',
 });
 
-const recreateDatabase = async () => {
+async function recreateDatabase() {
   try {
     const importPath = path.resolve(__dirname, 'accounts.sql');
     const seedDBContent = fs.readFileSync(importPath).toString();
     const queries = seedDBContent.split(';').filter((p) => p.trim());
     const inserts = queries.pop();
-    const queriesPromises = queries.map(async (query) => connection.execute(query));
-    await Promise.all(queriesPromises);
-    await connection.execute(inserts);
+    const createTable = queries.pop();
+    const queriesPromises = queries.map(async (query) => connection.query(query));
+    await Promise.all(queriesPromises)
+      .then(() => connection.query(createTable))
+      .then(() => connection.query(inserts));
     process.stdout.write('\nDatabase inciado...\n');
+    return '\nDatabase inciado...\n';
   } catch (error) {
-    process.stdout.write(`Falha em restaurar o Banco. ${error}`);
+    process.stdout.write(`\nFalha em restaurar o Banco. ${error}\n`);
+    return setTimeout(() => recreateDatabase(), 1000);
   }
-};
+}
 
 const getByAccountId = async (accountId) => {
   const [[rows]] = await connection.execute(`SELECT * FROM Accounts_db.Accounts WHERE customerId = ${accountId}`);
