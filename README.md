@@ -42,6 +42,8 @@ dos comandos assincronamente.
 
 - Nunca havia lidado com proxys em node, apenas middlewares de validação. Achei sensacional e experiência de conhecer e implementar um proxy como API Gateway para correto roteamento das requisições e integração dos microserviços.
 
+- Tive problemas para pegar os logs dos microserviços quando chamados pelo proxy. Descobri uma lib 'morgan' que auxilia nessa parte, trazendo os logs.
+
 # Rodando localmente
 
 Instale as dependências, na pasta raiz.
