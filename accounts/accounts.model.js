@@ -26,12 +26,12 @@ const recreateDatabase = async () => {
   }
 };
 
-const geyByAccountId = async (accountId) => {
-  const [[rows]] = await connection.execute(`SELECT * FROM accounts WHERE customerId = ${accountId}`);
+const getByAccountId = async (accountId) => {
+  const [[rows]] = await connection.execute(`SELECT * FROM Accounts_db.Accounts WHERE customerId = ${accountId}`);
   return rows;
 };
 
 module.exports = {
   recreateDatabase,
-  geyByAccountId,
+  getByAccountId,
 };
