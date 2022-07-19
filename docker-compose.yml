@@ -6,19 +6,19 @@ services:
     ports:
       - 3000:3000
   customer:
-    container_name: customer
-    build: ./customer
+    container_name: customers
+    build: ./customers
     ports:
       - 4000:4000
     depends_on:
-      - customer_db
+      - customers_db
     environment:
       - MYSQL_HOST=customer_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
   customer_db:
     image: mysql
-    container_name: customer_db
+    container_name: customers_db
     ports:
       - 3307:3306
     environment:
