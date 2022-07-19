@@ -1,12 +1,11 @@
 const router = require('express').Router();
-
-const validates = require('./middlewares/validateRequest');
+const { validateAccountRequest } = require('./middlewares/validateRequest');
 const accounts = require('./accounts');
 
 router.get('/:accountId', accounts.getByAccountId);
 
-router.put('/withdraw', validates.validateWithdrawRequest, accounts.withdraw);
+router.put('/withdraw', validateAccountRequest, accounts.withdraw);
 
-// router.get('/deposit', accounts.getByAccountId);
+router.put('/deposit', validateAccountRequest, accounts.deposit);
 
 module.exports = router;
