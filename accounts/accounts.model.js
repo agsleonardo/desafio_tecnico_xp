@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const mysql = require('mysql2/promise');
+const customError = require('./utils/error');
 
 require('dotenv').config();
 
@@ -28,10 +29,16 @@ const recreateDatabase = async () => {
 
 const getByAccountId = async (accountId) => {
   const [[rows]] = await connection.execute(`SELECT * FROM Accounts_db.Accounts WHERE customerId = ${accountId}`);
+  if (!rows) throw customError(404, 'Conta não encontrada');
   return rows;
 };
 
+const updateBalance = async (accountId, amount) => {
+  const rows = await connection.execute('UPDATE Accounts_db.Accounts SET balance = ? WHERE customerId = ?', [amount, accountId]);
+  return rows;
+};
 module.exports = {
   recreateDatabase,
   getByAccountId,
+  updateBalance,
 };
