@@ -1,10 +1,12 @@
 version: "3.8"
 services:
+
   auth:
     container_name: auth
     build: ./auth
     ports:
       - 3000:3000
+
   customers:
     container_name: customers
     build: ./customers
@@ -16,9 +18,23 @@ services:
       - MYSQL_HOST=customer_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
+
   customers_db:
     image: mysql
     container_name: customers_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+  accounts:
+    build: ./accounts
+    ports:
+      - "5000:5000"
+    depends_on:
+      - accounts_db
+
+  accounts_db:
+    image: mysql
+    container_name: accounts_db
     environment:
       MYSQL_ROOT_PASSWORD: password
   # order:
@@ -37,16 +53,3 @@ services:
   #     - mongo
   #     - book
   #     - customer
-  accounts:
-    build: ./accounts
-    ports:
-      - "5000:5000"
-    depends_on:
-      - accounts_db
-
-  accounts_db:
-    image: mysql
-    container_name: accounts_db
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-

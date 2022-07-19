@@ -17,12 +17,14 @@ const recreateDatabase = async () => {
     const seedDBContent = fs.readFileSync(importPath).toString();
     const queries = seedDBContent.split(';').filter((p) => p.trim());
     const inserts = queries.pop();
-    const queriesPromises = queries.map(async (query) => connection.execute(query));
-    await Promise.all(queriesPromises);
-    await connection.execute(inserts);
+    const createTable = queries.pop();
+    const queriesPromises = queries.map(async (query) => connection.query(query));
+    await Promise.all(queriesPromises)
+      .then(() => connection.query(createTable))
+      .then(() => connection.query(inserts));
     process.stdout.write('\nDatabase inciado...\n');
   } catch (error) {
-    process.stdout.write(`Falha em restaurar o Banco. ${error}`);
+    process.stdout.write(`\nFalha em restaurar o Banco. ${error}\n`);
   }
 };
 
