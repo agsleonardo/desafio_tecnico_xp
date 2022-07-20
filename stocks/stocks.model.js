@@ -38,8 +38,14 @@ const getAll = async () => {
   return rows;
 };
 
+const updateStock = async (stockId, stockQty) => {
+  const [rows] = await connection.query('UPDATE Stocks_db.Stocks SET availableQty = ? WHERE id = ?', [stockQty, stockId]);
+  return rows;
+};
+
 module.exports = {
   getByStockId,
   recreateDatabase,
   getAll,
+  updateStock,
 };

@@ -38,6 +38,8 @@ onde eles são comuns, como nodemon, express e eslint por exemplo.
 
 - Tomando erro de CORS quando a requisição parte do proxy para o microserviço via Swagger...
 
+- Está sendo um desafio organizar (ou orquestrar) todos os microserviços para 'conversarem' com qualidade.
+
 # Aprendizados
 
 - Precisava de uma forma para colocar todos os servidores no ar ao mesmo tempo, 

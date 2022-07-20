@@ -5,4 +5,6 @@ router.get('/', stocks.getAll);
 
 router.get('/:stockId', stocks.getByStockId);
 
+router.put('/', stocks.updateStock);
+
 module.exports = router;

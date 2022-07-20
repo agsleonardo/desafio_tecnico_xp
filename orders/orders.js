@@ -1,6 +1,6 @@
 const axios = require('axios');
 const model = require('./orders.model');
-const { getStockInfoById } = require('./utils/stocks');
+const { getStockInfoById, updateStock } = require('./utils/stocks');
 require('dotenv').config();
 
 const STOCKS_URL = process.env.STOCKS_URL || 'http://localhost:7100';
@@ -13,10 +13,12 @@ const getByCustomerId = async (req, res) => {
 
 const buy = async (req, res) => {
   const { customerId, stockId, stockQty } = req.body;
-  const stockBroker = await getStockInfoById(stockId);
+  const { data: stockBroker } = (await getStockInfoById(stockId)) || {};
   if (!stockBroker) return res.status(404).send({ message: 'Código de ação inválido' });
   if (stockBroker.availableQty < stockQty) return res.status(400).send({ message: 'Quantidade de ações indisponível' });
   await model.buy(customerId, stockId, stockQty, stockBroker.price);
+  await updateStock(stockId, (+stockBroker.availableQty - +stockQty));
+  // ---------------realizar o numero de ações
   // ---------------realizar a atualização da carteira do cliente
   return res.status(200).send({ message: 'Ordem de compra executada!' });
 };
