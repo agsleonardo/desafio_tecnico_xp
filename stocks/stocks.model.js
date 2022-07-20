@@ -28,13 +28,13 @@ async function recreateDatabase() {
   }
 }
 
-const getByStockId = async (customerId) => {
-  const [rows] = await connection.query('SELECT * FROM Stocks_db.Stocks WHERE stockId = ?', [customerId]);
+const getByStockId = async (stockId) => {
+  const [[rows]] = await connection.query('SELECT id, stock, ticker, availableQty, FORMAT( price, 2 ) as price FROM Stocks_db.Stocks WHERE id = ?', [stockId]);
   return rows;
 };
 
-const getAll = async (customerId) => {
-  const [rows] = await connection.query('SELECT * FROM Stocks_db.Stocks', [customerId]);
+const getAll = async () => {
+  const [rows] = await connection.query('SELECT id, stock, ticker, availableQty, FORMAT( price, 2 ) as price FROM Stocks_db.Stocks');
   return rows;
 };
 

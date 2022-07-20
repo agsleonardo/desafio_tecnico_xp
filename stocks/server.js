@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const logger = require('morgan');
 const swaggerDocs = require('./swagger');
 const router = require('./stocks.routes');
-// const model = require('./orders.model');
+const model = require('./stocks.model');
 
 const app = express();
 
@@ -32,5 +32,5 @@ app.use((err, _req, res, next) => {
   return next();
 });
 
-// model.recreateDatabase();
+model.recreateDatabase();
 app.listen(PORT, () => process.stdout.write(`\nStocks on port ${PORT}\n`));
