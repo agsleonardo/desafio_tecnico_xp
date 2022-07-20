@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const AUTH_URL = process.env.AUTH_URL || 'http://localhost:3000';
 const AUTH_URL_PRD = process.env.AUTH_URL_PRD || '---';
 
 module.exports = {
@@ -19,7 +18,7 @@ module.exports = {
       description: 'Produção',
     },
     {
-      url: `${AUTH_URL}`,
+      url: 'http://localhost:3000',
       description: 'Servidor local',
     },
   ],
