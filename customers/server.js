@@ -3,7 +3,7 @@ require('express-async-errors');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const logger = require('morgan');
-const swaggerDocs = require('./swagger.json');
+const swaggerDocs = require('./swagger');
 
 const model = require('./customer.model');
 
