@@ -7,4 +7,6 @@ router.get('/:customerId', orders.getByCustomerId);
 
 router.post('/buy', orders.buy);
 
+router.post('/sell', orders.sell);
+
 module.exports = router;
