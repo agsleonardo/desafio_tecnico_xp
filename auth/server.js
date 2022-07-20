@@ -1,10 +1,17 @@
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
+const cors = require('cors');
 const router = require('./auth.routes');
-const swaggerDocs = require('./swagger.json');
+const swaggerDocs = require('./swagger');
 require('express-async-errors');
 
 const app = express();
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  app.use(cors());
+  next();
+});
 app.use(express.json());
 app.use(router);
 

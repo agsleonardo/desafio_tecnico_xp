@@ -8,13 +8,18 @@ const swaggerDocs = require('./swagger');
 const model = require('./customer.model');
 
 const app = express();
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  app.use(cors());
+  next();
+});
 const routes = require('./customer.routes');
 
 app.use(logger('dev'));
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
-app.use(cors());
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(routes);
 

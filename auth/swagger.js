@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const AUTH_URL = process.env.AUTH_URL || 'http://localhost:3000';
-const AUTH_URL_PRD = process.env.AUTH_URL_PRD || 'http://localhost:3000';
+const AUTH_URL_PRD = process.env.AUTH_URL_PRD || '---';
 
 module.exports = {
   openapi: '3.0.0',
@@ -24,10 +24,6 @@ module.exports = {
     },
   ],
   basePath: '/v1',
-  schemes: [
-    'https',
-    'http',
-  ],
   components: {
     securitySchemes: {
       bearerAuth: {

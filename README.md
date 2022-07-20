@@ -34,6 +34,10 @@ onde eles são comuns, como nodemon, express e eslint por exemplo.
 
 - Houve um problema de assincronismo na rotina para fazer a primeira carga do banco de dados. Resolvi realizar a carga através de uma função recursiva.
 
+- Foi um desafio trabalhar com as variáveis de ambiente e garantir que a aplicação mantivesse a estabilidade trabalhando localmente (local ou docker) e em produção.
+
+- Tomando erro de CORS quando a requisição parte do proxy para o microserviço via Swagger...
+
 # Aprendizados
 
 - Precisava de uma forma para colocar todos os servidores no ar ao mesmo tempo, 

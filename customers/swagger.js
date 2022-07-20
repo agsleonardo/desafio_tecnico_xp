@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const CUSTOMER_URL = process.env.CUSTOMER_URL || 'http://localhost:4000';
-const CUSTOMER_URL_PRD = process.env.CUSTOMER_URL_PRD || 'http://localhost:4000';
+const CUSTOMER_URL_PRD = process.env.CUSTOMER_URL_PRD || '---';
 
 module.exports = {
   openapi: '3.0.0',
@@ -24,10 +24,6 @@ module.exports = {
     },
   ],
   basePath: '/v1',
-  schemes: [
-    'https',
-    'http',
-  ],
   paths: {
     '/': {
       post: {

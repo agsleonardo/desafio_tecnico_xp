@@ -2,6 +2,7 @@ const httpProxy = require('express-http-proxy');
 const express = require('express');
 const app = express();
 const logger = require('morgan');
+const cors = require('cors');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 10000;
@@ -9,7 +10,16 @@ const AUTH_URL = process.env.AUTH_URL || 'http://localhost:3000/';
 const CUSTOMER_URL = process.env.CUSTOMER_URL || 'http://localhost:4000/';
 const ACCOUNTS_URL = process.env.ACCOUNTS_URL || 'http://localhost:5000/';
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    app.use(cors());
+    next();
+  });
+
 app.use(logger('dev'));
+
+app.use(express.json());
 
 app.use('/auth', httpProxy(AUTH_URL));
 

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-const CUSTOMER_URL = process.env.CUSTOMER_URL || 'http://localhost:5000';
-const CUSTOMER_URL_PROD = process.env.CUSTOMER_URL_PROD || 'http://localhost:5000';
+const ACCOUNTS_URL = process.env.ACCOUNTS_URL || 'http://localhost:5000';
+const ACCOUNTS_URL_PROD = process.env.ACCOUNTS_URL_PROD || '---';
 
 module.exports = {
   openapi: '3.0.0',
@@ -15,19 +15,15 @@ module.exports = {
   },
   servers: [
     {
-      url: `${CUSTOMER_URL_PROD}`,
+      url: `${ACCOUNTS_URL_PROD}`,
       description: 'Produção',
     },
     {
-      url: `${CUSTOMER_URL}`,
+      url: `${ACCOUNTS_URL}`,
       description: 'Servidor local',
     },
   ],
   basePath: '/v1',
-  schemes: [
-    'https',
-    'http',
-  ],
   paths: {
     '/{customerId}': {
       get: {
