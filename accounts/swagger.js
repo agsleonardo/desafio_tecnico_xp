@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const ACCOUNTS_URL = process.env.ACCOUNTS_URL || 'http://localhost:5000';
 const ACCOUNTS_URL_PROD = process.env.ACCOUNTS_URL_PROD || '---';
 
 module.exports = {
@@ -19,7 +18,7 @@ module.exports = {
       description: 'Produção',
     },
     {
-      url: `${ACCOUNTS_URL}`,
+      url: 'http://localhost:5000',
       description: 'Servidor local',
     },
   ],
@@ -28,7 +27,7 @@ module.exports = {
     '/{customerId}': {
       get: {
         tags: [
-          'contas',
+          'accounts',
         ],
         summary: 'Encontra a conta de um cliente pelo ID',
         description: 'Retorna as informações da conta do cliente com o ID informado',
@@ -82,10 +81,76 @@ module.exports = {
         },
       },
     },
+    '/': {
+      post: {
+        tags: [
+          'accounts',
+        ],
+        summary: 'Cadastra uma nova conta',
+        description: '',
+        consumes: [
+          'application/json',
+        ],
+        produces: [
+          'application/json',
+        ],
+        parameters: [
+          {
+            in: 'body',
+            name: 'body',
+            required: true,
+            schema: {
+              $ref: '#/definitions/AccountPayload',
+            },
+          },
+        ],
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                $ref: '#/definitions/AccountPayload',
+              },
+              examples: {
+                cliente: {
+                  value: {
+                    accountId: 2,
+                    amount: 10,
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: 'OK',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/AccountPayloadOk',
+                },
+              },
+            },
+          },
+          500: {
+            description: 'Internal Server Error',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/CustomerByIdNotFound',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     '/withdraw': {
       put: {
         tags: [
-          'contas',
+          'accounts',
         ],
         summary: 'Realiza um saque na conta de um cliente',
         description: '',
@@ -152,7 +217,7 @@ module.exports = {
     '/deposit': {
       put: {
         tags: [
-          'contas',
+          'accounts',
         ],
         summary: 'Realiza um depósito na conta de um cliente',
         description: '',
