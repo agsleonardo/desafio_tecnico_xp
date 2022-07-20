@@ -7,8 +7,10 @@ require('express-async-errors');
 
 const app = express();
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Credentials', true);
   app.use(cors());
   next();
 });
@@ -19,9 +21,9 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use((err, _req, res, next) => {
   if (err) {
-    res.status(401).json();
+    return res.status(401).json();
   }
-  next();
+  return next();
 });
 
 const PORT = process.env.PORT || 3000;

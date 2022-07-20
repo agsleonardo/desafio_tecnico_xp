@@ -9,8 +9,10 @@ const model = require('./customer.model');
 
 const app = express();
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Credentials', true);
   app.use(cors());
   next();
 });
@@ -26,9 +28,9 @@ app.use(routes);
 app.use((err, _req, res, next) => {
   if (err) {
     const { status, message } = err;
-    res.status(status || 500).send({ message });
+    return res.status(status || 500).send({ message });
   }
-  next();
+  return next();
 });
 
 model.recreateDatabase();
