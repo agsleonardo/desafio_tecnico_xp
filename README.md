@@ -40,6 +40,8 @@ onde eles são comuns, como nodemon, express e eslint por exemplo.
 
 - Está sendo um desafio organizar (ou orquestrar) todos os microserviços para 'conversarem' com qualidade.
 
+- Garantir que todas as tasks da requisição sejam executadas de ponta a ponta, para garantir a consistencia das informações e a troca entre os microserviços.
+
 # Aprendizados
 
 - Precisava de uma forma para colocar todos os servidores no ar ao mesmo tempo, 
