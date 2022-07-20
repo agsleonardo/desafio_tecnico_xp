@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const AUTH_URL_PRD = process.env.AUTH_URL_PRD || '---';
+const PORT = process.env.PORT || 3100;
 
 module.exports = {
   openapi: '3.0.0',
@@ -18,7 +19,7 @@ module.exports = {
       description: 'Produção',
     },
     {
-      url: 'http://localhost:3100',
+      url: `http://localhost:${PORT}`,
       description: 'Servidor local',
     },
   ],

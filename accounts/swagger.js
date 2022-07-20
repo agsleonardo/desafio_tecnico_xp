@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const ACCOUNTS_URL_PROD = process.env.ACCOUNTS_URL_PROD || '---';
+const PORT = process.env.PORT || 5100;
 
 module.exports = {
   openapi: '3.0.0',
@@ -18,7 +19,7 @@ module.exports = {
       description: 'Produção',
     },
     {
-      url: 'http://localhost:5100',
+      url: `http://localhost:${PORT}`,
       description: 'Servidor local',
     },
   ],
