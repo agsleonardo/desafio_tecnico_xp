@@ -18,7 +18,7 @@ module.exports = {
       description: 'Produção',
     },
     {
-      url: 'http://localhost:3000',
+      url: 'http://localhost:3100',
       description: 'Servidor local',
     },
   ],
