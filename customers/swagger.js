@@ -7,7 +7,7 @@ module.exports = {
   info: {
     description: 'Esta API fornece informações sobre o cliente e o autentica.',
     version: '1.0.0',
-    title: 'Desafio XP - API Cliente',
+    title: 'Desafio XP - API Customers',
     contact: {
       email: 'agsleonardo@hotmail.com',
     },
@@ -27,7 +27,7 @@ module.exports = {
     '/': {
       post: {
         tags: [
-          'cliente',
+          'customers',
         ],
         summary: 'Cadastra um novo cliente',
         description: '',
@@ -94,7 +94,7 @@ module.exports = {
     '/{customerId}': {
       get: {
         tags: [
-          'cliente',
+          'customers',
         ],
         summary: 'Encontra um cliente pelo ID',
         description: 'Retorna as informações do cliente com o ID informado',
@@ -140,7 +140,7 @@ module.exports = {
     '/login': {
       post: {
         tags: [
-          'cliente',
+          'customers',
         ],
         summary: 'Autentica o cliente',
         description: '',

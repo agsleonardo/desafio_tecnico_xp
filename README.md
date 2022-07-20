@@ -52,6 +52,12 @@ dos comandos assincronamente.
 
 - Tive problemas para pegar os logs dos microserviços quando chamados pelo proxy. Descobri uma lib 'morgan' que auxilia nessa parte, trazendo os logs.
 
+# Melhorias
+
+- Adicionar as integrações de inclusão e atualização em transactions, para garantir a integridade dos dados em todos os ciclos ou rollback quando houver inconsistência.
+
+- Limitar o endpoint de criação de accounts para receber chamadas somente do microserviço de customers.
+
 # Rodando localmente
 
 Instale as dependências, na pasta raiz.

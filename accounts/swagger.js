@@ -7,7 +7,7 @@ module.exports = {
   info: {
     description: 'Esta API fornece informações sobre a conta dos clientes.',
     version: '1.0.0',
-    title: 'Desafio XP - API Contas',
+    title: 'Desafio XP - API Accounts',
     contact: {
       email: 'agsleonardo@hotmail.com',
     },
