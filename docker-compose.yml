@@ -10,24 +10,39 @@ services:
       - auth
       - customers
       - accounts
+      - stocks
       - customers_db
       - accounts_db
     environment:
-      AUTH_URL: 'http://auth:3000'
-      CUSTOMER_URL: 'http://customers:4000'
-      ACCOUNTS_URL: 'http://accounts:5000'
+      AUTH_URL: 'http://auth:3100'
+      CUSTOMER_URL: 'http://customers:4100'
+      ACCOUNTS_URL: 'http://accounts:5100'
+      STOCKS_URL: 'http://stocks:7100'
 
   auth:
     container_name: auth
     build: ./auth
     ports:
-      - 3000:3000
+      - 3100:3100
+
+  stocks:
+    container_name: stocks
+    build: ./stocks
+    ports:
+      - 7100:7100
+    depends_on:
+      - stocks_db
+    environment:
+      - MYSQL_HOST=stocks_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+    
 
   customers:
     container_name: customers
     build: ./customers
     ports:
-      - 4000:4000
+      - 4100:4100
     depends_on:
       - customers_db
     environment:
@@ -38,7 +53,7 @@ services:
   accounts:
     build: ./accounts
     ports:
-      - "5000:5000"
+      - 5100:5100
     depends_on:
       - accounts_db
     environment:
@@ -49,14 +64,18 @@ services:
   customers_db:
     image: mysql
     container_name: customers_db
-    ports:
-      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
 
   accounts_db:
     image: mysql
     container_name: accounts_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+  stocks_db:
+    image: mysql
+    container_name: stocks_db
     environment:
       MYSQL_ROOT_PASSWORD: password
   # order:

@@ -22,7 +22,7 @@ async function recreateDatabase() {
     await Promise.all(queriesPromises)
       .then(() => connection.query(createTable))
       .then(() => connection.query(inserts));
-    process.stdout.write('\nDatabase inciado...\n');
+    process.stdout.write('\nDatabase Orders inciado...\n');
     return '\nDatabase inciado...\n';
   } catch (error) {
     process.stdout.write(`\nFalha em restaurar o Banco Orders. ${error}\n`);

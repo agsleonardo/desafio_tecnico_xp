@@ -20,7 +20,7 @@ async function recreateDatabase() {
     const queriesPromises = queries.map(async (query) => connection.query(query));
     await Promise.all(queriesPromises)
       .then(() => connection.query(createTable));
-    process.stdout.write('\nDatabase inciado...\n');
+    process.stdout.write('\nDatabase Stocks inciado...\n');
     return '\nDatabase inciado...\n';
   } catch (error) {
     process.stdout.write(`\nFalha em restaurar o Banco Stocks. ${error}\n`);
