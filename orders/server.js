@@ -9,7 +9,7 @@ const router = require('./orders.routes');
 
 const app = express();
 
-const PORT = process.env.PORT || 6500;
+const PORT = process.env.PORT || 6100;
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
