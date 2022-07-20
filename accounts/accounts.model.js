@@ -41,8 +41,15 @@ const updateBalance = async (accountId, amount) => {
   const rows = await connection.execute('UPDATE Accounts_db.Accounts SET balance = ? WHERE customerId = ?', [amount, accountId]);
   return rows;
 };
+
+const create = async (customerId, balance) => {
+  const rows = await connection.execute('INSERT INTO Accounts_db.Accounts (customerId, balance) VALUES (?, ?)', [customerId, balance]);
+  return rows;
+};
+
 module.exports = {
   recreateDatabase,
   getByAccountId,
   updateBalance,
+  create,
 };

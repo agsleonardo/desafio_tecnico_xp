@@ -4,6 +4,8 @@ const accounts = require('./accounts');
 
 router.get('/', (req, res) => res.send('Este é o serviço de contas'));
 
+router.post('/', validateAccountRequest, accounts.create);
+
 router.get('/:accountId', accounts.getByAccountId);
 
 router.put('/withdraw', validateAccountRequest, accounts.withdraw);

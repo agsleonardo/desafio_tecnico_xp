@@ -7,6 +7,12 @@ const getByAccountId = async (req, res) => {
   res.status(200).send(accountData);
 };
 
+const create = async (req, res) => {
+  const { accountId, amount } = req.body;
+  await model.create(accountId, amount);
+  res.status(200).send({ message: 'Conta criada com sucesso' });
+};
+
 const withdraw = async (req, res) => {
   const { accountId, amount } = req.body;
   const accountData = await model.getByAccountId(accountId);
@@ -28,4 +34,5 @@ module.exports = {
   getByAccountId,
   withdraw,
   deposit,
+  create,
 };
