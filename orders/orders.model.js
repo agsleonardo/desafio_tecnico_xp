@@ -35,7 +35,19 @@ const getByCustomerId = async (customerId) => {
   return rows;
 };
 
+const buy = async (customerId, stockId, stockQty, stockPrice) => {
+  const [order] = await connection.query('INSERT INTO Orders_db.Orders (customerId, stockId, stockQty, stockPrice, transactionType) VALUES (?, ?, ?, ?, ?)', [customerId, stockId, stockQty, stockPrice, 'B']);
+  return order;
+};
+
+const sell = async (customerId, stockId, stockQty, stockPrice) => {
+  const [order] = await connection.query('INSERT INTO Orders_db.Orders (customerId, stockId, stockQty, stockPrice, transactionType) VALUES (?, ?, ?, ?, ?)', [customerId, stockId, stockQty, stockPrice, 'S']);
+  return order;
+};
+
 module.exports = {
   getByCustomerId,
+  buy,
+  sell,
   recreateDatabase,
 };
