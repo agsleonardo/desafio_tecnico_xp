@@ -31,17 +31,17 @@ async function recreateDatabase() {
 }
 
 const getById = async (id) => {
-  const [[rows]] = await connection.query('SELECT id, email, username FROM Customer_db.Customer WHERE id = ?', [id]);
+  const [[rows]] = await connection.query('SELECT id, email, username FROM Customers_db.Customers WHERE id = ?', [id]);
   return rows;
 };
 
 const getByEmail = async (email) => {
-  const [[rows]] = await connection.query('SELECT * FROM Customer_db.Customer WHERE email = ?', [email]);
+  const [[rows]] = await connection.query('SELECT * FROM Customers_db.Customers WHERE email = ?', [email]);
   return rows;
 };
 
 const create = async (email, username, password) => {
-  const [{ insertId }] = await connection.query('INSERT INTO Customer_db.Customer (email, username, password) VALUES (?, ?, ?)', [email, username, password]);
+  const [{ insertId }] = await connection.query('INSERT INTO Customers_db.Customers (email, username, password) VALUES (?, ?, ?)', [email, username, password]);
   return insertId;
 };
 

@@ -4,12 +4,12 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const logger = require('morgan');
 const swaggerDocs = require('./swagger');
-// const model = require('./orders.model');
+const model = require('./orders.model');
 const router = require('./orders.routes');
 
 const app = express();
 
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 6500;
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,5 +32,5 @@ app.use((err, _req, res, next) => {
   return next();
 });
 
-// model.recreateDatabase();
+model.recreateDatabase();
 app.listen(PORT, () => process.stdout.write(`\nOrders on port ${PORT}\n`));

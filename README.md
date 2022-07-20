@@ -58,6 +58,8 @@ dos comandos assincronamente.
 
 - Limitar o endpoint de criação de accounts para receber chamadas somente do microserviço de customers.
 
+- Alterar IDs increment para hash forte
+
 # Rodando localmente
 
 Instale as dependências, na pasta raiz.
