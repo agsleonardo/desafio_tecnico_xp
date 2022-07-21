@@ -61,7 +61,7 @@ const sell = async (req, res) => {
   const { data: stocksWallet } = (await getCustomerWallet(customerId, stockId)) || {};
   // verifica se cliente possui ação
   const stockInWallet = stocksWallet && stocksWallet.find((stock) => stock.stockId === stockId);
-  if (!stockInWallet) return res.status(404).send({ message: 'Cliente não possui a ação informada!' });
+  if (!stockInWallet) return res.status(404).send({ message: 'Cliente não existe ou possui a ação informada!' });
   // verifica se a quantidade de ações na carteira é maior que a quantidade a ser vendida
   if (stockInWallet.stockQty < stockQty) return res.status(400).send({ message: 'Quantidade de ações indisponível para venda' });
 

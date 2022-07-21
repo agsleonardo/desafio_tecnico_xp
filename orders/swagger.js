@@ -170,10 +170,17 @@ module.exports = {
                 $ref: '#/definitions/BuyPayloadModel',
               },
               examples: {
-                cliente: {
+                200: {
                   value: {
                     customerId: 1,
                     stockId: 25,
+                    stockQty: 5,
+                  },
+                },
+                404: {
+                  value: {
+                    customerId: 1,
+                    stockId: 75,
                     stockQty: 5,
                   },
                 },
@@ -189,6 +196,17 @@ module.exports = {
                 schema: {
                   type: 'object',
                   $ref: '#/definitions/SignUpPayloadOk',
+                },
+              },
+            },
+          },
+          404: {
+            description: 'Not Found',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/CustomerDontHaveStock',
                 },
               },
             },
@@ -242,6 +260,15 @@ module.exports = {
       properties: {
         message: {
           type: 'string',
+        },
+      },
+    },
+    CustomerDontHaveStock: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+          example: 'Cliente não existe ou possui a ação informada!',
         },
       },
     },
