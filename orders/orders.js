@@ -1,6 +1,6 @@
 const model = require('./orders.model');
 const { getStockInfoById, updateStock } = require('./utils/stocks');
-// const { getCustumerStockInfoById } = require('./utils/wallet');
+const { getCustomerWallet } = require('./utils/wallet');
 require('dotenv').config();
 
 const getByCustomerId = async (req, res) => {
@@ -20,12 +20,17 @@ const buy = async (req, res) => {
   await model.buy(customerId, stockId, stockQty, stockBroker.price);
 
   // faz atualização da corretora
-  const newQty = +stockBroker.availableQty - +stockQty;
-  await updateStock(stockId, newQty);
+  const newBrokerQty = +stockBroker.availableQty - +stockQty;
+  await updateStock(stockId, newBrokerQty);
 
   // traz informações da acão e atualiza a carteira do cliente
-  // const { data: stockWallet } = (await getCustumerStockInfoById(customerId, stockId)) || {};
-  // updateWallet(customerId, stockId, stockQty, newPrice)
+  const { data: stockWallet } = (await getCustomerWallet(customerId, stockId)) || {};
+  const stockInWallet = stockWallet.find((stock) => stock.stockId === stockId);
+  if (stockInWallet) {
+    const newStockQty = +stockInWallet.stockQty + +stockQty;
+    await updateStock(stockId, newStockQty);
+  }
+  // updateWallet(customerId, stockId, stockQty, newPrice);
   // ---------------realizar a atualização da carteira do cliente
   return res.status(200).send({ message: 'Ordem de compra executada!' });
 };
@@ -37,7 +42,7 @@ const sell = async (req, res) => {
   if (!stockBroker) return res.status(404).send({ message: 'Código de ação inválido' });
 
   // traz informações da acão da carteira
-  // const { data: stockWallet } = (await getCustumerStockInfoById(customerId, stockId)) || {};
+  // const { data: stockWallet } = (await getCustomerWallet(customerId, stockId)) || {};
   // if (stockWallet.stockQty < stockQty) return res
   // .status(400).send({ message: 'Quantidade de ações indisponível em carteira' });
 
@@ -45,8 +50,8 @@ const sell = async (req, res) => {
   await model.sell(customerId, stockId, stockQty, stockBroker.price);
 
   // faz atualização da corretora
-  const newQty = +stockBroker.availableQty + +stockQty;
-  await updateStock(stockId, newQty);
+  const newBrokerQty = +stockBroker.availableQty + +stockQty;
+  await updateStock(stockId, newBrokerQty);
 
   // faz atualização da carteira do cliente
   // updateWallet(customerId, stockId, stockQty)
