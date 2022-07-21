@@ -20,7 +20,8 @@ const updateStockQty = async (req, res) => {
 };
 
 const deleteStockFromWallet = async (req, res) => {
-  const deletedStock = await model.deleteStockFromWallet(req.body);
+  console.log('AQUI AS QUET', req.query);
+  const deletedStock = await model.deleteStockFromWallet(req.query);
   if (!deletedStock) return res.status(404).send({ message: 'Cliente não possui esta ação em carteira' });
   return res.status(200).send({ message: 'Ação removida com sucesso!' });
 };

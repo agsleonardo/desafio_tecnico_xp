@@ -26,7 +26,7 @@ const updateStockAtWallet = async (customerId, stockId, stockQty, value) => {
 };
 
 const deleteStockFromWallet = async (customerId, stockId) => {
-  const customerWallet = await axios.delete(`${WALLETS_URL}/`, {
+  const customerWallet = await axios.delete(`${WALLETS_URL}/?customerId=${customerId}&stockId=${stockId}`, {
     customerId, stockId,
   })
     .catch(() => null);
