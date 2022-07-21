@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const WALLETS_URL_PRD = process.env.WALLETS_URL_PRD || '---';
-const PORT = process.env.PORT || 6100;
+const PORT = process.env.PORT || 8100;
 
 module.exports = {
   openapi: '3.0.0',
@@ -28,10 +28,10 @@ module.exports = {
     '/{customerId}': {
       get: {
         tags: [
-          'customers',
+          'wallets',
         ],
-        summary: 'Encontra as ordens de um cliente pelo ID',
-        description: 'Retorna as informações de todas ordens de determinado cliente com o ID informado',
+        summary: 'Encontra as ações da carteira de um cliente pelo ID',
+        description: 'Retorna as informações de todas ações de determinado cliente com o ID informado',
         produces: [
           'application/json',
         ],
@@ -53,8 +53,19 @@ module.exports = {
                 schema: {
                   type: 'array',
                   items: {
-                    $ref: '#/definitions/OrdersById',
+                    $ref: '#/definitions/WalletById',
                   },
+                },
+              },
+            },
+          },
+          404: {
+            description: 'Not Found',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/DefaultMessageNotFound',
                 },
               },
             },
@@ -65,7 +76,7 @@ module.exports = {
               'application/json': {
                 schema: {
                   type: 'object',
-                  $ref: '#/definitions/SignUpPayloadOk',
+                  $ref: '#/definitions/DefaultMessageError',
                 },
               },
             },
@@ -73,12 +84,12 @@ module.exports = {
         },
       },
     },
-    '/buy': {
+    '/': {
       post: {
         tags: [
-          'customers',
+          'wallets',
         ],
-        summary: 'Cadastra uma nova ordem de compra',
+        summary: 'Cadastra uma nova ação na carteira de um cliente',
         description: '',
         consumes: [
           'application/json',
@@ -92,7 +103,7 @@ module.exports = {
             name: 'body',
             required: true,
             schema: {
-              $ref: '#/definitions/BuyPayloadModel',
+              $ref: '#/definitions/WalletPayloadModel',
             },
           },
         ],
@@ -100,14 +111,15 @@ module.exports = {
           content: {
             'application/json': {
               schema: {
-                $ref: '#/definitions/BuyPayloadModel',
+                $ref: '#/definitions/WalletPayloadModel',
               },
               examples: {
                 cliente: {
                   value: {
                     customerId: 1,
-                    stockId: 25,
+                    stockId: 35,
                     stockQty: 5,
+                    value: 100,
                   },
                 },
               },
@@ -121,7 +133,7 @@ module.exports = {
               'application/json': {
                 schema: {
                   type: 'object',
-                  $ref: '#/definitions/SignUpPayloadOk',
+                  $ref: '#/definitions/WalletPostSuccess',
                 },
               },
             },
@@ -132,20 +144,18 @@ module.exports = {
               'application/json': {
                 schema: {
                   type: 'object',
-                  $ref: '#/definitions/SignUpPayloadOk',
+                  $ref: '#/definitions/DefaultMessageError',
                 },
               },
             },
           },
         },
       },
-    },
-    '/sell': {
-      post: {
+      put: {
         tags: [
-          'customers',
+          'wallets',
         ],
-        summary: 'Cadastra uma nova ordem de venda',
+        summary: 'Atualiza o registro de uma ação na carteira de um cliente',
         description: '',
         consumes: [
           'application/json',
@@ -159,7 +169,7 @@ module.exports = {
             name: 'body',
             required: true,
             schema: {
-              $ref: '#/definitions/BuyPayloadModel',
+              $ref: '#/definitions/WalletPayloadModel',
             },
           },
         ],
@@ -167,14 +177,15 @@ module.exports = {
           content: {
             'application/json': {
               schema: {
-                $ref: '#/definitions/BuyPayloadModel',
+                $ref: '#/definitions/WalletPayloadModel',
               },
               examples: {
                 cliente: {
                   value: {
                     customerId: 1,
-                    stockId: 25,
+                    stockId: 85,
                     stockQty: 5,
+                    value: 100,
                   },
                 },
               },
@@ -188,7 +199,18 @@ module.exports = {
               'application/json': {
                 schema: {
                   type: 'object',
-                  $ref: '#/definitions/SignUpPayloadOk',
+                  $ref: '#/definitions/WalletPutSuccess',
+                },
+              },
+            },
+          },
+          404: {
+            description: 'Not Found',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/DefaultMessageNotFoundPut',
                 },
               },
             },
@@ -199,7 +221,82 @@ module.exports = {
               'application/json': {
                 schema: {
                   type: 'object',
-                  $ref: '#/definitions/SignUpPayloadOk',
+                  $ref: '#/definitions/DefaultMessageError',
+                },
+              },
+            },
+          },
+        },
+      },
+      delete: {
+        tags: [
+          'wallets',
+        ],
+        summary: 'Remove uma ação existente na carteira de um cliente',
+        description: '',
+        consumes: [
+          'application/json',
+        ],
+        produces: [
+          'application/json',
+        ],
+        parameters: [
+          {
+            in: 'body',
+            name: 'body',
+            required: true,
+            schema: {
+              $ref: '#/definitions/WalletPayloadModelDel',
+            },
+          },
+        ],
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                $ref: '#/definitions/WalletPayloadModel',
+              },
+              examples: {
+                cliente: {
+                  value: {
+                    customerId: 1,
+                    stockId: 85,
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: 'OK',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/WalletDeleteSuccess',
+                },
+              },
+            },
+          },
+          404: {
+            description: 'Not Found',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/DefaultMessageNotFoundDelete',
+                },
+              },
+            },
+          },
+          500: {
+            description: 'Internal Server Error',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/DefaultMessageError',
                 },
               },
             },
@@ -209,43 +306,7 @@ module.exports = {
     },
   },
   definitions: {
-    BuyPayloadModel: {
-      type: 'object',
-      properties: {
-        customerId: {
-          type: 'integer',
-        },
-        stockId: {
-          type: 'integer',
-        },
-        stockQty: {
-          type: 'integer',
-        },
-      },
-    },
-    SignUpPayloadOExample: {
-      type: 'object',
-      properties: {
-        email: {
-          type: 'string',
-        },
-        username: {
-          type: 'string',
-        },
-        password: {
-          type: 'string',
-        },
-      },
-    },
-    SignUpPayloadOk: {
-      type: 'object',
-      properties: {
-        message: {
-          type: 'string',
-        },
-      },
-    },
-    OrdersById: {
+    WalletById: {
       type: 'object',
       properties: {
         id: {
@@ -260,34 +321,100 @@ module.exports = {
         stockQty: {
           type: 'integer',
         },
-        stockPrice: {
+        averagePrice: {
           type: 'number',
           format: 'double',
         },
-        transactionType: {
-          type: 'string',
-        },
-        createdAt: {
-          type: 'string',
-        },
       },
     },
-    LoginPayload: {
+    DefaultMessageNotFound: {
       type: 'object',
       properties: {
-        email: {
+        message: {
           type: 'string',
+          example: 'Carteira vazia ou inexistente!',
         },
-        password: {
+      },
+    },
+    DefaultMessageNotFoundPut: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+          example: 'Cliente não possui esta ação em carteira',
+        },
+      },
+    },
+    DefaultMessageNotFoundDelete: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+          example: 'Cliente não possui esta ação em carteira',
+        },
+      },
+    },
+    DefaultMessageError: {
+      type: 'object',
+      properties: {
+        message: {
           type: 'string',
         },
       },
     },
-    LoginOk: {
+    WalletPayloadModel: {
+      type: 'object',
+      properties: {
+        customerId: {
+          type: 'integer',
+        },
+        stockId: {
+          type: 'integer',
+        },
+        stockQty: {
+          type: 'integer',
+        },
+        value: {
+          type: 'number',
+          format: 'double',
+        },
+      },
+    },
+    WalletPayloadModelDel: {
+      type: 'object',
+      properties: {
+        customerId: {
+          type: 'integer',
+        },
+        stockId: {
+          type: 'integer',
+        },
+      },
+    },
+    WalletPostSuccess: {
       type: 'object',
       properties: {
         token: {
           type: 'string',
+          example: 'Ação adicionada com sucesso!',
+        },
+      },
+    },
+    WalletPutSuccess: {
+      type: 'object',
+      properties: {
+        token: {
+          type: 'string',
+          example: 'Ação atualizada com sucesso!',
+        },
+      },
+    },
+    WalletDeleteSuccess: {
+      type: 'object',
+      properties: {
+        token: {
+          type: 'string',
+          example: 'Ação removida com sucesso!',
         },
       },
     },
