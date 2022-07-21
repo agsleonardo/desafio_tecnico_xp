@@ -11,6 +11,7 @@ const CUSTOMER_URL = process.env.CUSTOMER_URL || 'http://localhost:4100/';
 const ACCOUNTS_URL = process.env.ACCOUNTS_URL || 'http://localhost:5100/';
 const ORDERS_URL = process.env.ORDERS_URL || 'http://localhost:6100/';
 const STOCKS_URL = process.env.STOCKS_URL || 'http://localhost:7100/';
+const WALLETS_URL = process.env.WALLETS_URL || 'http://localhost:8100/';
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -32,6 +33,8 @@ app.use('/accounts', httpProxy(ACCOUNTS_URL));
 app.use('/stocks', httpProxy(STOCKS_URL));
 
 app.use('/orders', httpProxy(ORDERS_URL));
+
+app.use('/wallets', httpProxy(WALLETS_URL));
 
 app.use('/*', (_req, res) => res.status(404).send('Bad Route!'));
 

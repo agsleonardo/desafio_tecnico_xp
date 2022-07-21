@@ -11,32 +11,24 @@ services:
       - customers
       - accounts
       - stocks
+      - wallets
       - customers_db
       - accounts_db
+      - stocks_db
+      - wallets_db
     environment:
       AUTH_URL: 'http://auth:3100'
       CUSTOMER_URL: 'http://customers:4100'
       ACCOUNTS_URL: 'http://accounts:5100'
+      ORDERS_URL: 'http://orders:6100'
       STOCKS_URL: 'http://stocks:7100'
+      WALLETS_URL: 'http://stocks:8100'
 
   auth:
     container_name: auth
     build: ./auth
     ports:
       - 3100:3100
-
-  stocks:
-    container_name: stocks
-    build: ./stocks
-    ports:
-      - 7100:7100
-    depends_on:
-      - stocks_db
-    environment:
-      - MYSQL_HOST=stocks_db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=password
-    
 
   customers:
     container_name: customers
@@ -60,7 +52,44 @@ services:
       - MYSQL_HOST=accounts_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
+  
+  orders:
+    container_name: orders
+    build: ./orders
+    ports:
+      - 6100:6100
+    depends_on:
+      - orders_db
+    environment:
+      - MYSQL_HOST=orders_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
 
+  stocks:
+    container_name: stocks
+    build: ./stocks
+    ports:
+      - 7100:7100
+    depends_on:
+      - stocks_db
+    environment:
+      - MYSQL_HOST=stocks_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+
+  wallets:
+    container_name: wallets
+    build: ./wallets
+    ports:
+      - 8100:8100
+    depends_on:
+      - wallets_db
+    environment:
+      - MYSQL_HOST=wallets_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+
+ 
   customers_db:
     image: mysql
     container_name: customers_db
@@ -78,19 +107,15 @@ services:
     container_name: stocks_db
     environment:
       MYSQL_ROOT_PASSWORD: password
-  # order:
-  #   build: ./order
-  #   ports:
-  #     - "5000:5000"
-  #   depends_on:
-  #     - mongo
-  #     - book
-  #     - customer
-  # wallet:
-  #   build: ./wallet
-  #   ports:
-  #     - "6000:6000"
-  #   depends_on:
-  #     - mongo
-  #     - book
-  #     - customer
+  
+  wallets_db:
+    image: mysql
+    container_name: wallets_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+  orders_db:
+    image: mysql
+    container_name: orders_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
