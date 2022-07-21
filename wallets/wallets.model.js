@@ -33,10 +33,32 @@ const getWalletByCustomerId = async (customerId) => {
     'SELECT * FROM Wallets_db.Wallets WHERE customerId = ?',
     [customerId],
   );
-  return wallet;
+  return wallet.length && wallet;
+};
+
+const addNewStockToWallet = async ({
+  customerId, stockId, stockQty, value,
+}) => {
+  const [{ insertId }] = await connection.query('INSERT INTO Wallets_db.Wallets (customerId, stockId, stockQty, averagePrice) VALUES (?, ?, ?, ?)', [customerId, stockId, stockQty, value]);
+  return insertId;
+};
+
+const updateStockQty = async ({
+  customerId, stockId, stockQty, value,
+}) => {
+  const [{ affectedRows }] = await connection.query('UPDATE Wallets_db.Wallets SET stockQty = ?, averagePrice = ? WHERE customerId = ? AND stockId = ?', [stockQty, value, customerId, stockId]);
+  return affectedRows;
+};
+
+const deleteStockFromWallet = async ({ customerId, stockId }) => {
+  const [{ affectedRows }] = await connection.query('DELETE FROM Wallets_db.Wallets WHERE customerId = ? AND stockId = ?', [customerId, stockId]);
+  return affectedRows;
 };
 
 module.exports = {
   recreateDatabase,
   getWalletByCustomerId,
+  addNewStockToWallet,
+  updateStockQty,
+  deleteStockFromWallet,
 };
