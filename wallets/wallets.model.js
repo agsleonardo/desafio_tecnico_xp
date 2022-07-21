@@ -28,6 +28,15 @@ async function recreateDatabase() {
   }
 }
 
+const getWalletByCustomerId = async (customerId) => {
+  const [wallet] = await connection.query(
+    'SELECT * FROM Wallets_db.Wallets WHERE customerId = ?',
+    [customerId],
+  );
+  return wallet;
+};
+
 module.exports = {
   recreateDatabase,
+  getWalletByCustomerId,
 };
