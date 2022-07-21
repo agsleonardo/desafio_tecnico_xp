@@ -8,7 +8,7 @@ const validateAccountRequest = (req, _res, next) => {
       action: () => { throw customError(400, 'Dados incompletos ou quantia zerada.'); },
     },
     {
-      check: Number.isNaN(+amount) || Number.isNaN(+amount),
+      check: Number.isNaN(+accountId) || Number.isNaN(+amount),
       action: () => { throw customError(400, 'Dados inválidos, informe apenas números.'); },
     },
     {
