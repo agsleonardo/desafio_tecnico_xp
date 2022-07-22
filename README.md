@@ -46,6 +46,7 @@ onde eles são comuns, como nodemon, express e eslint por exemplo.
 
 - Mais um problema inesperado. Agora referente à validação dos requests trocados entre os próprios microserviços.
 Estou verificando uma forma boa de sanar esse problema. Uma das formas que pensei é pegar o user-agent do cliente e ver se é igual ao axios, isso bypassaria a validação de token porém deixaria o sistema vulnerável para ataques eventuais de outros clientes em node. Outra solução que pensei seria resgatar o token recebido pelo cliente e atacchar ele nas sub-requisições.
+Consegui resolver usando axios interceptor e criando uma request personalizada com um token válido, usado nas requisições internas. Criei um token sem expiração específica para essas requests internas.
 
 # Aprendizados
 
