@@ -1,8 +1,15 @@
 const model = require('./orders.model');
 const { getStockInfoById, updateStock } = require('./utils/stocks');
 const {
-  getCustomerWallet, insertStockIntoWallet, updateStockAtWallet, deleteStockFromWallet,
+  getCustomerWallet,
+  insertStockIntoWallet,
+  updateStockAtWallet,
+  deleteStockFromWallet,
 } = require('./utils/wallet');
+const {
+  updateBalance,
+  checkBalanceToAllowWithdraw,
+} = require('./utils/accounts');
 require('dotenv').config();
 
 const getByCustomerId = async (req, res) => {
@@ -25,6 +32,10 @@ const buy = async (req, res) => {
   if (!stockBroker) return res.status(404).send({ message: 'Código de ação inválido' });
   if (stockBroker.availableQty < stockQty) return res.status(400).send({ message: 'Quantidade de ações indisponível' });
 
+  // checa se usuário tem saldo em conta para compra
+  const allowBuy = await checkBalanceToAllowWithdraw(customerId, (+stockQty * +stockBroker.price));
+  if (!allowBuy) return res.status(400).send({ message: 'Saldo insuficiente para operação!' });
+
   // faz atualização das ordens de compra na lista de ordens
   await model.buy(customerId, stockId, stockQty, stockBroker.price);
 
@@ -44,10 +55,14 @@ const buy = async (req, res) => {
       +stockBroker.price,
     );
     await updateStockAtWallet(customerId, stockId, newStockQty, newValue);
+
+    await updateBalance(customerId, (+stockBroker.price * +stockQty), 'withdraw');
     return res.status(200).send({ message: 'Ordem de compra executada!' });
   }
   // ---------------realizar a atualização da carteira do cliente
   insertStockIntoWallet(customerId, stockId, stockQty, stockBroker.price);
+  // atualiza a conta do cliente
+  await updateBalance(customerId, (+stockBroker.price * +stockQty), 'withdraw');
   return res.status(200).send({ message: 'Ordem de compra executada!' });
 };
 
@@ -86,6 +101,8 @@ const sell = async (req, res) => {
     return res.status(200).send({ message: 'Ordem de venda executada!' });
   }
   await updateStockAtWallet(customerId, stockId, newStockQty, newValue);
+  // atualiza a conta do cliente
+  await updateBalance(customerId, (+stockBroker.price * +stockQty), 'deposit');
   return res.status(200).send({ message: 'Ordem de venda executada!' });
 };
 

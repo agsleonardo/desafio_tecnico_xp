@@ -1,16 +1,17 @@
-const axios = require('axios');
+// const axios = require('axios');
+const Request = require('./request');
 require('dotenv').config();
 
 const WALLETS_URL = process.env.WALLETS_URL || 'http://localhost:8100';
 
 const getCustomerWallet = async (customerId) => {
-  const customerWallet = await axios.get(`${WALLETS_URL}/${customerId}`)
+  const customerWallet = await Request.get(`${WALLETS_URL}/${customerId}`)
     .catch(() => null);
   return customerWallet;
 };
 
 const insertStockIntoWallet = async (customerId, stockId, stockQty, value) => {
-  const stockWallet = await axios.post(`${WALLETS_URL}/`, {
+  const stockWallet = await Request.post(`${WALLETS_URL}/`, {
     customerId, stockId, stockQty, value,
   })
     .catch(() => null);
@@ -18,7 +19,7 @@ const insertStockIntoWallet = async (customerId, stockId, stockQty, value) => {
 };
 
 const updateStockAtWallet = async (customerId, stockId, stockQty, value) => {
-  const customerWallet = await axios.put(`${WALLETS_URL}/`, {
+  const customerWallet = await Request.put(`${WALLETS_URL}/`, {
     customerId, stockId, stockQty, value,
   })
     .catch(() => null);
@@ -26,7 +27,7 @@ const updateStockAtWallet = async (customerId, stockId, stockQty, value) => {
 };
 
 const deleteStockFromWallet = async (customerId, stockId) => {
-  const customerWallet = await axios.delete(`${WALLETS_URL}/?customerId=${customerId}&stockId=${stockId}`, {
+  const customerWallet = await Request.delete(`${WALLETS_URL}/?customerId=${customerId}&stockId=${stockId}`, {
     customerId, stockId,
   })
     .catch(() => null);

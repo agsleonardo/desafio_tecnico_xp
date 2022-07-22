@@ -44,6 +44,9 @@ onde eles são comuns, como nodemon, express e eslint por exemplo.
 
 - Quando configurei o middleware de autenticação para validar o token JWT, comecei a tomar um erro de cors que só dava pelo swagger, quando fazia a chamada via curl ou client funcionava ok. Notei que antes do navegador enviar a requisição, ele mandava uma requisição do tipo OPTIONS. No meu middleware, eu não tratava esse tipo de requisição e verificava se nela havia algum token no header. Pesquisei sobre esse tipo de requisição, vi que ela serve para 'verificar' as configurações do servidor e os tipos que ele aceita. É uma pré verificação para garantir que a requisição será resolvida. No meu caso, minha rotina tratava essa requisição do tipo options, sem o token, e voltava uma resposta 401, o que gerava o erro de CORS embora toda configuração tivesse sido feita. Como solução, decidi bypassar essa chamada do tipo OPTIONS pelo middleware.
 
+- Mais um problema inesperado. Agora referente à validação dos requests trocados entre os próprios microserviços.
+Estou verificando uma forma boa de sanar esse problema. Uma das formas que pensei é pegar o user-agent do cliente e ver se é igual ao axios, isso bypassaria a validação de token porém deixaria o sistema vulnerável para ataques eventuais de outros clientes em node. Outra solução que pensei seria resgatar o token recebido pelo cliente e atacchar ele nas sub-requisições.
+
 # Aprendizados
 
 - Precisava de uma forma para colocar todos os servidores no ar ao mesmo tempo, 

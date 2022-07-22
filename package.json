@@ -4,10 +4,10 @@
   "description": "Este projeto foi desenvolvido para etapa de Desafio Técnico do processo seletivo dos alunos da Turma XP da Trybe.",
   "main": "index.js",
   "scripts": {
-    "postinstall": "concurrently \"cd customers && npm install\" \"cd auth && npm install\" \"cd accounts && npm install\" \"cd stocks && npm install\" \"cd orders && npm install\" \"cd wallets && npm install\"",
     "start": "concurrently \"cd customers && npm start\" \"cd auth && npm start\" \"cd accounts && npm start\" \"cd stocks && npm start\" \"cd orders && npm start\" \"cd wallets && npm start\" \"node server.js\"",
+    "postinstall": "concurrently \"cd customers && npm install\" \"cd auth && npm install\" \"cd accounts && npm install\" \"cd stocks && npm install\" \"cd orders && npm install\" \"cd wallets && npm install\"",
     "dev": "concurrently \"cd customers && npm run dev\" \"cd auth && npm run dev\" \"cd accounts && npm run dev\" \"cd stocks && npm run dev\" \"cd orders && npm run dev\" \"cd wallets && npm run dev\" \"nodemon server.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test":  "concurrently \"cd accounts && npm test\""
   },
   "repository": {
     "type": "git",
