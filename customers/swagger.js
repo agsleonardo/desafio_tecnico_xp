@@ -9,9 +9,6 @@ module.exports = {
     description: 'Esta API fornece informações sobre o cliente e o autentica.',
     version: '1.0.0',
     title: 'Desafio XP - API Customers',
-    contact: {
-      email: 'agsleonardo@hotmail.com',
-    },
   },
   components: {
     securitySchemes: {
@@ -260,5 +257,9 @@ module.exports = {
         },
       },
     },
+  },
+  externalDocs: {
+    description: 'VOLTAR PARA MENU',
+    url: 'http://localhost:10000/',
   },
 };

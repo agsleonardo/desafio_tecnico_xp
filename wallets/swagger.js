@@ -9,9 +9,6 @@ module.exports = {
     description: 'Esta API fornece informações sobre a carteira dos clientes.',
     version: '1.0.0',
     title: 'Desafio XP - API Wallets',
-    contact: {
-      email: 'agsleonardo@hotmail.com',
-    },
   },
   servers: [
     {
@@ -511,5 +508,9 @@ module.exports = {
         },
       },
     },
+  },
+  externalDocs: {
+    description: 'VOLTAR PARA MENU',
+    url: 'http://localhost:10000/',
   },
 };

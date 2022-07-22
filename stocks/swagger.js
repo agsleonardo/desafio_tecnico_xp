@@ -9,9 +9,6 @@ module.exports = {
     description: 'Esta API fornece informações sobre as ações do mercado.',
     version: '1.0.0',
     title: 'Desafio XP - API Stocks',
-    contact: {
-      email: 'agsleonardo@hotmail.com',
-    },
   },
   servers: [
     {
@@ -236,5 +233,9 @@ module.exports = {
         },
       },
     },
+  },
+  externalDocs: {
+    description: 'VOLTAR PARA MENU',
+    url: 'http://localhost:10000/',
   },
 };

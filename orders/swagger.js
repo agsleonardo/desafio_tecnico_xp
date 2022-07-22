@@ -9,9 +9,6 @@ module.exports = {
     description: 'Esta API fornece informações sobre as ordens de um cliente e o também cria ordens de compra e venda de ações.',
     version: '1.0.0',
     title: 'Desafio XP - API Orders',
-    contact: {
-      email: 'agsleonardo@hotmail.com',
-    },
   },
   servers: [
     {
@@ -406,5 +403,9 @@ module.exports = {
         },
       },
     },
+  },
+  externalDocs: {
+    description: 'VOLTAR PARA MENU',
+    url: 'http://localhost:10000/',
   },
 };
