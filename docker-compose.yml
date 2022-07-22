@@ -29,6 +29,8 @@ services:
     build: ./auth
     ports:
       - 3100:3100
+    depends_on:
+      - customers_db
 
   customers:
     container_name: customers

@@ -1,8 +1,10 @@
 const express = require('express');
-const validateRequest = require('./auth');
+const auth = require('./auth');
 
 const router = express.Router();
 
-router.get('/', validateRequest);
+router.get('/login', auth.login);
+
+router.get('/', auth.validateRequest);
 
 module.exports = router;

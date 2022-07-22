@@ -62,5 +62,120 @@ module.exports = {
         },
       },
     },
+    '/login': {
+      post: {
+        tags: [
+          'auth',
+        ],
+        summary: 'Autentica o cliente',
+        description: '',
+        consumes: [
+          'application/json',
+        ],
+        produces: [
+          'application/json',
+        ],
+        parameters: [
+          {
+            in: 'body',
+            name: 'body',
+            required: true,
+            schema: {
+              $ref: '#/definitions/LoginPayload',
+            },
+          },
+        ],
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                $ref: '#/definitions/LoginPayload',
+              },
+              examples: {
+                cliente: {
+                  value: {
+                    email: 'nara@gmail.com',
+                    password: '1234',
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: 'OK',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/LoginOk',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'OK',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/MsgErrorCredentials',
+                },
+              },
+            },
+          },
+          500: {
+            description: 'Internal Server Error',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/definitions/MsgError',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  definitions: {
+    MsgError: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+        },
+      },
+    },
+    MsgErrorCredentials: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+          enum: ['Usuário ou senha inválidos'],
+        },
+      },
+    },
+    LoginPayload: {
+      type: 'object',
+      properties: {
+        email: {
+          type: 'string',
+        },
+        password: {
+          type: 'string',
+        },
+      },
+    },
+    LoginOk: {
+      type: 'object',
+      properties: {
+        token: {
+          type: 'string',
+        },
+      },
+    },
   },
 };

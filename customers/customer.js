@@ -1,10 +1,8 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const customerModel = require('./customer.model');
 require('dotenv').config();
 
-const secret = process.env.JWT_SECRET || 'secret';
 const ACCOUNTS_URL = process.env.ACCOUNTS_URL_PRD || 'http://localhost:5000';
 
 const create = async (req, res) => {
@@ -22,22 +20,7 @@ const getById = async (req, res) => {
   res.status(200).send(customer);
 };
 
-const login = async (req, res) => {
-  const { email, password } = req.body;
-  const customer = await customerModel.getByEmail(email);
-  if (!customer) throw new Error('Usuário ou senha inválidos');
-  const isAuth = await bcrypt.compare(password, customer.password);
-  if (!isAuth) throw new Error('Usuário ou senha inválidos');
-  const token = jwt.sign({
-    id: customer.id,
-    email: customer.email,
-    username: customer.username,
-  }, secret, { expiresIn: '1h' });
-  return res.status(200).send({ token });
-};
-
 module.exports = {
   create,
   getById,
-  login,
 };

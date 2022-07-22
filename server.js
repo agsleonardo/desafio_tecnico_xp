@@ -20,6 +20,12 @@ app.use((req, res, next) => {
     next();
   });
 
+const authenticationMiddleware = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (!token) return res.status(401).send({message: 'Token não encontrado'});
+  next();
+}
+
 app.use(logger('dev'));
 
 app.use(express.json());
@@ -32,7 +38,7 @@ app.use('/accounts', httpProxy(ACCOUNTS_URL));
 
 app.use('/stocks', httpProxy(STOCKS_URL));
 
-app.use('/orders', httpProxy(ORDERS_URL));
+app.use('/orders',httpProxy(ORDERS_URL));
 
 app.use('/wallets', httpProxy(WALLETS_URL));
 
