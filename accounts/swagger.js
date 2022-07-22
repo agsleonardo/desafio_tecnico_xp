@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const ACCOUNTS_URL_PROD = process.env.ACCOUNTS_URL_PROD || '---';
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 5100;
 
 module.exports = {
   openapi: '3.0.0',
@@ -13,11 +13,11 @@ module.exports = {
   servers: [
     {
       url: `${ACCOUNTS_URL_PROD}`,
-      description: 'ACCOUNTS Produção',
+      description: 'Produção',
     },
     {
       url: `http://localhost:${PORT}`,
-      description: 'ACCOUNTS Local',
+      description: 'Servidor local',
     },
   ],
   basePath: '/v1',
@@ -31,7 +31,7 @@ module.exports = {
     },
   },
   paths: {
-    '/accounts/{customerId}': {
+    '/{customerId}': {
       get: {
         tags: [
           'accounts',
@@ -109,7 +109,7 @@ module.exports = {
         },
       },
     },
-    '/accounts': {
+    '/': {
       post: {
         tags: [
           'accounts',
@@ -180,7 +180,7 @@ module.exports = {
         },
       },
     },
-    '/accounts/withdraw': {
+    '/withdraw': {
       put: {
         tags: [
           'accounts',
@@ -252,7 +252,7 @@ module.exports = {
         },
       },
     },
-    '/accounts/deposit': {
+    '/deposit': {
       put: {
         tags: [
           'accounts',

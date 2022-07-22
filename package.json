@@ -7,7 +7,7 @@
     "start": "concurrently \"cd customers && npm start\" \"cd auth && npm start\" \"cd accounts && npm start\" \"cd stocks && npm start\" \"cd orders && npm start\" \"cd wallets && npm start\" \"node server.js\"",
     "postinstall": "concurrently \"cd customers && npm install\" \"cd auth && npm install\" \"cd accounts && npm install\" \"cd stocks && npm install\" \"cd orders && npm install\" \"cd wallets && npm install\"",
     "dev": "concurrently \"cd customers && npm run dev\" \"cd auth && npm run dev\" \"cd accounts && npm run dev\" \"cd stocks && npm run dev\" \"cd orders && npm run dev\" \"cd wallets && npm run dev\" \"nodemon server.js\"",
-    "test": "concurrently \"cd accounts && npm test\""
+    "test":  "concurrently \"cd accounts && npm test\""
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,6 @@
     "mysql2": "^2.3.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19",
-    "swagger-ui-express": "^4.5.0"
+    "nodemon": "^2.0.19"
   }
 }

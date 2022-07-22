@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const WALLETS_URL_PRD = process.env.WALLETS_URL_PRD || '---';
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 8100;
 
 module.exports = {
   openapi: '3.0.0',
@@ -31,7 +31,7 @@ module.exports = {
   },
   basePath: '/v1',
   paths: {
-    '/wallets/{customerId}': {
+    '/{customerId}': {
       get: {
         tags: [
           'wallets',
@@ -111,7 +111,7 @@ module.exports = {
         },
       },
     },
-    '/wallets': {
+    '/': {
       post: {
         tags: [
           'wallets',

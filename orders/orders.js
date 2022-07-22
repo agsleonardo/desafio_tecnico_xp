@@ -30,11 +30,11 @@ const buy = async (req, res) => {
   // traz informações da acão da corretora
   const { data: stockBroker } = (await getStockInfoById(stockId)) || {};
   if (!stockBroker) return res.status(404).send({ message: 'Código de ação inválido' });
-  if (stockBroker.availableQty < stockQty) return res.status(401).send({ message: 'Quantidade de ações indisponível' });
+  if (stockBroker.availableQty < stockQty) return res.status(400).send({ message: 'Quantidade de ações indisponível' });
 
   // checa se usuário tem saldo em conta para compra
   const allowBuy = await checkBalanceToAllowWithdraw(customerId, (+stockQty * +stockBroker.price));
-  if (!allowBuy) return res.status(401).send({ message: 'Saldo insuficiente para operação!' });
+  if (!allowBuy) return res.status(400).send({ message: 'Saldo insuficiente para operação!' });
 
   // faz atualização das ordens de compra na lista de ordens
   await model.buy(customerId, stockId, stockQty, stockBroker.price);
@@ -76,9 +76,9 @@ const sell = async (req, res) => {
   const { data: stocksWallet } = (await getCustomerWallet(customerId, stockId)) || {};
   // verifica se cliente possui ação
   const stockInWallet = stocksWallet && stocksWallet.find((stock) => stock.stockId === stockId);
-  if (!stockInWallet) return res.status(404).send({ message: 'Cliente não existe ou não possui a ação informada!' });
+  if (!stockInWallet) return res.status(404).send({ message: 'Cliente não existe ou possui a ação informada!' });
   // verifica se a quantidade de ações na carteira é maior que a quantidade a ser vendida
-  if (stockInWallet.stockQty < stockQty) return res.status(401).send({ message: 'Quantidade de ações indisponível para venda' });
+  if (stockInWallet.stockQty < stockQty) return res.status(400).send({ message: 'Quantidade de ações indisponível para venda' });
 
   // faz o calculo para carteira do cliente
   const newStockQty = +stockInWallet.stockQty - +stockQty;
