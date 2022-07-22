@@ -24,11 +24,25 @@ module.exports = {
     },
   ],
   basePath: '/v1',
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
   paths: {
     '/{customerId}': {
       get: {
         tags: [
           'accounts',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Encontra a conta de um cliente pelo ID',
         description: 'Retorna as informações da conta do cliente com o ID informado',
@@ -53,6 +67,22 @@ module.exports = {
                 schema: {
                   type: 'object',
                   $ref: '#/definitions/CustomerById',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
                 },
               },
             },
@@ -86,6 +116,11 @@ module.exports = {
       post: {
         tags: [
           'accounts',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Cadastra uma nova conta',
         description: '',
@@ -153,6 +188,11 @@ module.exports = {
         tags: [
           'accounts',
         ],
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
         summary: 'Realiza um saque na conta de um cliente',
         description: '',
         consumes: [
@@ -219,6 +259,11 @@ module.exports = {
       put: {
         tags: [
           'accounts',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Realiza um depósito na conta de um cliente',
         description: '',

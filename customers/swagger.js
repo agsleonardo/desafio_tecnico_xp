@@ -13,6 +13,15 @@ module.exports = {
       email: 'agsleonardo@hotmail.com',
     },
   },
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
   servers: [
     {
       url: `${CUSTOMER_URL_PRD}`,
@@ -29,6 +38,11 @@ module.exports = {
       post: {
         tags: [
           'customers',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Cadastra um novo cliente',
         description: '',
@@ -78,6 +92,22 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
+                },
+              },
+            },
+          },
           500: {
             description: 'Internal Server Error',
             content: {
@@ -96,6 +126,11 @@ module.exports = {
       get: {
         tags: [
           'customers',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Encontra um cliente pelo ID',
         description: 'Retorna as informações do cliente com o ID informado',
@@ -120,6 +155,22 @@ module.exports = {
                 schema: {
                   type: 'object',
                   $ref: '#/definitions/CustomerById',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
                 },
               },
             },

@@ -6,6 +6,7 @@ const logger = require('morgan');
 const swaggerDocs = require('./swagger');
 const router = require('./wallets.routes');
 const model = require('./wallets.model');
+// const allowRequest = require('./middlewares/auth');
 
 const app = express();
 

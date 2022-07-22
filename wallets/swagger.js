@@ -23,12 +23,26 @@ module.exports = {
       description: 'Servidor local',
     },
   ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
   basePath: '/v1',
   paths: {
     '/{customerId}': {
       get: {
         tags: [
           'wallets',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Encontra as ações da carteira de um cliente pelo ID',
         description: 'Retorna as informações de todas ações de determinado cliente com o ID informado',
@@ -54,6 +68,22 @@ module.exports = {
                   type: 'array',
                   items: {
                     $ref: '#/definitions/WalletById',
+                  },
+                },
+              },
+            },
+          },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
                   },
                 },
               },
@@ -88,6 +118,11 @@ module.exports = {
       post: {
         tags: [
           'wallets',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Cadastra uma nova ação na carteira de um cliente',
         description: '',
@@ -138,6 +173,22 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
+                },
+              },
+            },
+          },
           500: {
             description: 'Internal Server Error',
             content: {
@@ -154,6 +205,11 @@ module.exports = {
       put: {
         tags: [
           'wallets',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Atualiza o registro de uma ação na carteira de um cliente',
         description: '',
@@ -204,6 +260,22 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
+                },
+              },
+            },
+          },
           404: {
             description: 'Not Found',
             content: {
@@ -231,6 +303,11 @@ module.exports = {
       delete: {
         tags: [
           'wallets',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Remove uma ação existente na carteira de um cliente',
         description: '',
@@ -275,6 +352,22 @@ module.exports = {
                 schema: {
                   type: 'object',
                   $ref: '#/definitions/WalletDeleteSuccess',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
                 },
               },
             },

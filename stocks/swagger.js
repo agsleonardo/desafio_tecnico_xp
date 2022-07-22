@@ -23,12 +23,26 @@ module.exports = {
       description: 'Servidor local',
     },
   ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
   basePath: '/v1',
   paths: {
     '/': {
       get: {
         tags: [
           'customers',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Lista todas as ações',
         description: 'Lista todas as ações disponíveis na corretora',
@@ -43,6 +57,22 @@ module.exports = {
                 schema: {
                   type: 'object',
                   $ref: '#/definitions/CustomerById',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
                 },
               },
             },
@@ -65,6 +95,11 @@ module.exports = {
       get: {
         tags: [
           'customers',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Encontra um cliente pelo ID',
         description: 'Retorna as informações do cliente com o ID informado',
@@ -89,6 +124,22 @@ module.exports = {
                 schema: {
                   type: 'object',
                   $ref: '#/definitions/CustomerById',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
                 },
               },
             },

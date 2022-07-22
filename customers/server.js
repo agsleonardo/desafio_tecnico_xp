@@ -4,7 +4,7 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const logger = require('morgan');
 const swaggerDocs = require('./swagger');
-
+// const allowRequest = require('./middlewares/auth');
 const model = require('./customer.model');
 
 const app = express();

@@ -6,6 +6,7 @@ const logger = require('morgan');
 const swaggerDocs = require('./swagger');
 const model = require('./accounts.model');
 const router = require('./accounts.routes');
+// const allowRequest = require('./middlewares/auth');
 
 const app = express();
 

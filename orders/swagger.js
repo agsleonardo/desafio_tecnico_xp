@@ -23,12 +23,26 @@ module.exports = {
       description: 'Servidor local',
     },
   ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
   basePath: '/v1',
   paths: {
     '/{customerId}': {
       get: {
         tags: [
           'customers',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Encontra as ordens de um cliente pelo ID',
         description: 'Retorna as informações de todas ordens de determinado cliente com o ID informado',
@@ -59,6 +73,22 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
+                },
+              },
+            },
+          },
           500: {
             description: 'Internal Server Error',
             content: {
@@ -77,6 +107,11 @@ module.exports = {
       post: {
         tags: [
           'customers',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Cadastra uma nova ordem de compra',
         description: '',
@@ -126,6 +161,22 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
+                },
+              },
+            },
+          },
           500: {
             description: 'Internal Server Error',
             content: {
@@ -144,6 +195,11 @@ module.exports = {
       post: {
         tags: [
           'customers',
+        ],
+        security: [
+          {
+            bearerAuth: [],
+          },
         ],
         summary: 'Cadastra uma nova ordem de venda',
         description: '',
@@ -177,6 +233,22 @@ module.exports = {
                     stockQty: 5,
                   },
                 },
+                401: {
+                  description: 'Unauthorized',
+                  content: {
+                    'application/json': {
+                      schema: {
+                        type: 'object',
+                        properties: {
+                          message: {
+                            type: 'string',
+                            example: 'Token não encontrado',
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
                 404: {
                   value: {
                     customerId: 1,
@@ -196,6 +268,22 @@ module.exports = {
                 schema: {
                   type: 'object',
                   $ref: '#/definitions/SignUpPayloadOk',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    message: {
+                      type: 'string',
+                      example: 'Token não encontrado',
+                    },
+                  },
                 },
               },
             },

@@ -3,8 +3,8 @@ const auth = require('./auth');
 
 const router = express.Router();
 
-router.get('/login', auth.login);
+router.post('/login', auth.login);
 
-router.get('/', auth.validateRequest);
+router.post('/', auth.isAuthenticated);
 
 module.exports = router;
