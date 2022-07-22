@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const axios = require('axios');
+const Request = require('./utils/request');
 const customerModel = require('./customer.model');
 require('dotenv').config();
 
@@ -10,7 +10,7 @@ const create = async (req, res) => {
   const passwordHash = await bcrypt.hash(password, 10);
   const customer = await customerModel.create(email, username, passwordHash);
   if (!customer) throw new Error('Usuário não cadastrado! Verifique os dados e tente novamente.');
-  await axios.post(ACCOUNTS_URL, { accountId: customer, amount: 0.01 });
+  await Request.post(ACCOUNTS_URL, { accountId: customer, amount: 0.01 });
   res.status(200).send({ message: 'Cliente criado com sucesso' });
 };
 

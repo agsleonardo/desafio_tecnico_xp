@@ -25,7 +25,7 @@ const login = async (req, res) => {
     id: customer.id,
     email: customer.email,
     username: customer.username,
-  }, secret, { expiresIn: '1h' });
+  }, secret, { expiresIn: '6h' });
   return res.status(200).send({ token });
 };
 
