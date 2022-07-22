@@ -9,9 +9,6 @@ module.exports = {
     description: 'Esta API fornece informações sobre a conta dos clientes.',
     version: '1.0.0',
     title: 'Desafio XP - API Accounts',
-    contact: {
-      email: 'agsleonardo@hotmail.com',
-    },
   },
   servers: [
     {
@@ -400,5 +397,9 @@ module.exports = {
         },
       },
     },
+  },
+  externalDocs: {
+    description: 'Voltar para menu',
+    url: 'http://localhost:10000/',
   },
 };

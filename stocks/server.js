@@ -6,7 +6,7 @@ const logger = require('morgan');
 const swaggerDocs = require('./swagger');
 const router = require('./stocks.routes');
 const model = require('./stocks.model');
-// const allowRequest = require('./middlewares/auth');
+const allowRequest = require('./middlewares/auth');
 
 const app = express();
 
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 app.use(logger('dev'));
 app.use(express.json());
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use(router);
+app.use(allowRequest, router);
 
 app.use((err, _req, res, next) => {
   if (err) {

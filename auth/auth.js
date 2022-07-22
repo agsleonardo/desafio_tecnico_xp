@@ -6,10 +6,13 @@ require('dotenv').config();
 const secret = process.env.JWT_SECRET || 'secret';
 
 const isAuthenticated = (req, res) => {
-  const { token } = req.body;
-  const allowRequest = jwt.verify(token, secret);
-  if (!allowRequest) res.status(401).send('Token inválido');
-  res.status(200).send(allowRequest);
+  try {
+    const { token } = req.body;
+    const allowRequest = jwt.verify(token, secret);
+    return res.status(200).send(allowRequest);
+  } catch (error) {
+    return res.status(200).send(false);
+  }
 };
 
 const login = async (req, res) => {

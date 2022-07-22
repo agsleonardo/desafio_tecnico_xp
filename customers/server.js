@@ -4,7 +4,7 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const logger = require('morgan');
 const swaggerDocs = require('./swagger');
-// const allowRequest = require('./middlewares/auth');
+const allowRequest = require('./middlewares/auth');
 const model = require('./customer.model');
 
 const app = express();
@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 4100;
 
 app.use(express.json());
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use(routes);
+app.use(allowRequest, routes);
 
 app.use((err, _req, res, next) => {
   if (err) {

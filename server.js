@@ -24,6 +24,8 @@ app.use(logger('dev'));
 
 app.use(express.json());
 
+app.get('/', (req, res) => res.send('Fazer o menu de opções de Swaggers'));
+
 app.use('/auth', httpProxy(AUTH_URL));
 
 app.use('/customers', httpProxy(CUSTOMER_URL));

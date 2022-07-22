@@ -42,6 +42,8 @@ onde eles são comuns, como nodemon, express e eslint por exemplo.
 
 - Garantir que todas as tasks da requisição sejam executadas de ponta a ponta, para garantir a consistencia das informações e a troca entre os microserviços.
 
+- Quando configurei o middleware de autenticação para validar o token JWT, comecei a tomar um erro de cors que só dava pelo swagger, quando fazia a chamada via curl ou client funcionava ok. Notei que antes do navegador enviar a requisição, ele mandava uma requisição do tipo OPTIONS. No meu middleware, eu não tratava esse tipo de requisição e verificava se nela havia algum token no header. Pesquisei sobre esse tipo de requisição, vi que ela serve para 'verificar' as configurações do servidor e os tipos que ele aceita. É uma pré verificação para garantir que a requisição será resolvida. No meu caso, minha rotina tratava essa requisição do tipo options, sem o token, e voltava uma resposta 401, o que gerava o erro de CORS embora toda configuração tivesse sido feita. Como solução, decidi bypassar essa chamada do tipo OPTIONS pelo middleware.
+
 # Aprendizados
 
 - Precisava de uma forma para colocar todos os servidores no ar ao mesmo tempo, 
