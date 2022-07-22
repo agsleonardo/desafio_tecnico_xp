@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const logger = require('morgan');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./swagger');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 10000;
@@ -23,6 +25,8 @@ app.use((req, res, next) => {
 app.use(logger('dev'));
 
 app.use(express.json());
+
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.get('/', (req, res) => res.send('Fazer o menu de opções de Swaggers'));
 

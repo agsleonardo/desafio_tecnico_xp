@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const CUSTOMER_URL_PRD = process.env.CUSTOMER_URL_PRD || '---';
-const PORT = process.env.PORT || 4100;
+const PORT = process.env.PORT || 10000;
 
 module.exports = {
   openapi: '3.0.0',
@@ -22,16 +22,16 @@ module.exports = {
   servers: [
     {
       url: `${CUSTOMER_URL_PRD}`,
-      description: 'Produção',
+      description: 'CUSTOMERS Produção',
     },
     {
       url: `http://localhost:${PORT}`,
-      description: 'Servidor local',
+      description: 'CUSTOMERS Local',
     },
   ],
   basePath: '/v1',
   paths: {
-    '/': {
+    '/customers': {
       post: {
         tags: [
           'customers',
@@ -119,7 +119,7 @@ module.exports = {
         },
       },
     },
-    '/{customerId}': {
+    '/customers/{customerId}': {
       get: {
         tags: [
           'customers',

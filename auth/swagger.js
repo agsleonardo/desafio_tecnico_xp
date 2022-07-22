@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const AUTH_URL_PRD = process.env.AUTH_URL_PRD || '---';
-const PORT = process.env.PORT || 3100;
+const PORT = process.env.PORT || 10000;
 
 module.exports = {
   openapi: '3.0.0',
@@ -13,11 +13,11 @@ module.exports = {
   servers: [
     {
       url: `${AUTH_URL_PRD}`,
-      description: 'Produção',
+      description: 'AUTH Produção',
     },
     {
       url: `http://localhost:${PORT}`,
-      description: 'Servidor local',
+      description: 'AUTH Local',
     },
   ],
   basePath: '/v1',
@@ -31,7 +31,7 @@ module.exports = {
     },
   },
   paths: {
-    '/': {
+    '/auth': {
       get: {
         security: [
           {
@@ -59,7 +59,7 @@ module.exports = {
         },
       },
     },
-    '/login': {
+    '/auth/login': {
       post: {
         tags: [
           'auth',

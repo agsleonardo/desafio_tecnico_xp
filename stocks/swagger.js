@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const STOCKS_URL_PRD = process.env.STOCKS_URL_PRD || '---';
-const PORT = process.env.PORT || 7100;
+const PORT = process.env.PORT || 10000;
 
 module.exports = {
   openapi: '3.0.0',
@@ -31,7 +31,7 @@ module.exports = {
   },
   basePath: '/v1',
   paths: {
-    '/': {
+    '/stocks': {
       get: {
         tags: [
           'customers',
@@ -88,7 +88,7 @@ module.exports = {
         },
       },
     },
-    '/{stockId}': {
+    '/stocks/{stockId}': {
       get: {
         tags: [
           'customers',

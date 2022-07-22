@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const ORDERS_URL_PRD = process.env.CUSTOMER_URL_PRD || '---';
-const PORT = process.env.PORT || 6100;
+const PORT = process.env.PORT || 10000;
 
 module.exports = {
   openapi: '3.0.0',
@@ -31,10 +31,10 @@ module.exports = {
   },
   basePath: '/v1',
   paths: {
-    '/{customerId}': {
+    '/orders/{customerId}': {
       get: {
         tags: [
-          'customers',
+          'orders',
         ],
         security: [
           {
@@ -100,10 +100,10 @@ module.exports = {
         },
       },
     },
-    '/buy': {
+    '/orders/buy': {
       post: {
         tags: [
-          'customers',
+          'orders',
         ],
         security: [
           {
@@ -188,10 +188,10 @@ module.exports = {
         },
       },
     },
-    '/sell': {
+    '/orders/sell': {
       post: {
         tags: [
-          'customers',
+          'orders',
         ],
         security: [
           {
@@ -403,9 +403,5 @@ module.exports = {
         },
       },
     },
-  },
-  externalDocs: {
-    description: 'VOLTAR PARA MENU',
-    url: 'http://localhost:10000/',
   },
 };
