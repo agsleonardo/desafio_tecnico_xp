@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 const mysql = require('mysql2/promise');
-const customError = require('./utils/error');
 
 require('dotenv').config();
 
@@ -33,7 +32,6 @@ async function recreateDatabase() {
 
 const getByAccountId = async (accountId) => {
   const [[rows]] = await connection.execute(`SELECT * FROM Accounts_db.Accounts WHERE customerId = ${accountId}`);
-  if (!rows) throw customError(404, 'Conta não encontrada');
   return rows;
 };
 

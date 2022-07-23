@@ -32,7 +32,7 @@ module.exports = {
   },
   paths: {
     '/': {
-      get: {
+      post: {
         security: [
           {
             bearerAuth: [],

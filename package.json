@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"cd customers && npm start\" \"cd auth && npm start\" \"cd accounts && npm start\" \"cd stocks && npm start\" \"cd orders && npm start\" \"cd wallets && npm start\" \"node server.js\"",
-    "installDeps": "concurrently \"cd customers && npm install\" \"cd auth && npm install\" \"cd accounts && npm install\" \"cd stocks && npm install\" \"cd orders && npm install\" \"cd wallets && npm install\"",
+    "installDeps": "concurrently \"cd customers && npm install\" \"cd auth && npm install\" \"cd accounts && npm install\" \"cd stocks && npm install\" \"cd orders && npm install\" \"cd wallets && npm install\" \"npm install\"",
     "dev": "concurrently \"cd customers && npm run dev\" \"cd auth && npm run dev\" \"cd accounts && npm run dev\" \"cd stocks && npm run dev\" \"cd orders && npm run dev\" \"cd wallets && npm run dev\" \"nodemon server.js\"",
-    "test": "concurrently \"cd accounts && npm test\""
+    "test": "concurrently \"cd accounts && npm test\" \"cd orders && npm test\""
   },
   "repository": {
     "type": "git",
