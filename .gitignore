@@ -1,8 +1,13 @@
 node_modules
 anotacoes.txt
 auth/node_modules
+auth/.nyc_output
 accounts/node_modules
+accounts/.nyc_output
 custom/node_modules
+custom/.nyc_output
 wallet/node_modules
+wallet/.nyc_output
 orders/node_modules
+orders/.nyc_output
 .env
