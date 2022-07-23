@@ -12,17 +12,12 @@ const {
 } = require('./utils/accounts');
 require('dotenv').config();
 
+const calculateAveragePrice = require('./utils/calculateAVGPrice');
+
 const getByCustomerId = async (req, res) => {
   const { customerId } = req.params;
   const orders = await model.getByCustomerId(customerId);
   res.status(200).send(orders);
-};
-
-const calculateAveragePrice = (oldQty, oldPrice, newQty, newPrice) => {
-  const oldTotal = oldQty * oldPrice;
-  const newTotal = newQty * newPrice;
-  const averagePrice = (oldTotal + newTotal) / (oldQty + newQty);
-  return averagePrice;
 };
 
 const buy = async (req, res) => {

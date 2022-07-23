@@ -6,12 +6,11 @@ const {
   describe, it, beforeEach, afterEach,
 } = require('mocha');
 
-chai.use(require('chai-as-promised'));
 chai.use(require('sinon-chai'));
 
 const accounts = require('../accounts');
 const model = require('../accounts.model');
-const mock = require('../mock');
+const mock = require('./mock');
 
 describe('Testes do Microserviço Accounts', () => {
   describe('Testes do método getByAccountId', () => {

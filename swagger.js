@@ -325,7 +325,7 @@ module.exports = {
       },
     },
     '/auth': {
-      get: {
+      post: {
         security: [
           {
             bearerAuth: [],
