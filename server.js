@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const logger = require('morgan');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./swagger');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 10000;
@@ -24,8 +26,6 @@ app.use(logger('dev'));
 
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('Fazer o menu de opções de Swaggers'));
-
 app.use('/auth', httpProxy(AUTH_URL));
 
 app.use('/customers', httpProxy(CUSTOMER_URL));
@@ -37,6 +37,8 @@ app.use('/stocks', httpProxy(STOCKS_URL));
 app.use('/orders', httpProxy(ORDERS_URL));
 
 app.use('/wallets', httpProxy(WALLETS_URL));
+
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/*', (_req, res) => res.status(404).send('Bad Route!'));
 

@@ -399,7 +399,7 @@ module.exports = {
     },
   },
   externalDocs: {
-    description: 'VOLTAR PARA MENU',
+    description: 'VOLTAR PARA LISTA PRINCIPAL',
     url: 'http://localhost:10000/',
   },
 };
