@@ -4,3 +4,4 @@ customers
 orders
 wallet
 node_modules
+.env

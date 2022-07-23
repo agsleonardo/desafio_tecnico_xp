@@ -5,3 +5,4 @@ accounts/node_modules
 custom/node_modules
 wallet/node_modules
 orders/node_modules
+.env

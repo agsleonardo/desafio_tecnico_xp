@@ -17,12 +17,12 @@ services:
       - stocks_db
       - wallets_db
     environment:
-      AUTH_URL: 'http://auth:3100'
-      CUSTOMER_URL: 'http://customers:4100'
-      ACCOUNTS_URL: 'http://accounts:5100'
-      ORDERS_URL: 'http://orders:6100'
-      STOCKS_URL: 'http://stocks:7100'
-      WALLETS_URL: 'http://stocks:8100'
+      - AUTH_URL='http://auth:3100'
+      - CUSTOMER_URL='http://customers:4100'
+      - ACCOUNTS_URL='http://accounts:5100'
+      - ORDERS_URL='http://orders:6100'
+      - STOCKS_URL='http://stocks:7100'
+      - WALLETS_URL='http://wallets:8100'
 
   auth:
     container_name: auth
@@ -31,6 +31,16 @@ services:
       - 3100:3100
     depends_on:
       - customers_db
+    environment:
+      - AUTH_URL='http://auth:3100'
+      - CUSTOMER_URL='http://customers:4100'
+      - ACCOUNTS_URL='http://accounts:5100'
+      - ORDERS_URL='http://orders:6100'
+      - STOCKS_URL='http://stocks:7100'
+      - WALLETS_URL='http://wallets:8100'
+      - MYSQL_HOST=customers_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
 
   customers:
     container_name: customers
@@ -40,6 +50,12 @@ services:
     depends_on:
       - customers_db
     environment:
+      - AUTH_URL='http://auth:3100'
+      - CUSTOMER_URL='http://customers:4100'
+      - ACCOUNTS_URL='http://accounts:5100'
+      - ORDERS_URL='http://orders:6100'
+      - STOCKS_URL='http://stocks:7100'
+      - WALLETS_URL='http://wallets:8100'
       - MYSQL_HOST=customers_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
@@ -51,6 +67,12 @@ services:
     depends_on:
       - accounts_db
     environment:
+      - AUTH_URL='http://auth:3100'
+      - CUSTOMER_URL='http://customers:4100'
+      - ACCOUNTS_URL='http://accounts:5100'
+      - ORDERS_URL='http://orders:6100'
+      - STOCKS_URL='http://stocks:7100'
+      - WALLETS_URL='http://wallets:8100'
       - MYSQL_HOST=accounts_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
@@ -63,6 +85,12 @@ services:
     depends_on:
       - orders_db
     environment:
+      - AUTH_URL='http://auth:3100'
+      - CUSTOMER_URL='http://customers:4100'
+      - ACCOUNTS_URL='http://accounts:5100'
+      - ORDERS_URL='http://orders:6100'
+      - STOCKS_URL='http://stocks:7100'
+      - WALLETS_URL='http://wallets:8100'
       - MYSQL_HOST=orders_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
@@ -75,6 +103,12 @@ services:
     depends_on:
       - stocks_db
     environment:
+      - AUTH_URL='http://auth:3100'
+      - CUSTOMER_URL='http://customers:4100'
+      - ACCOUNTS_URL='http://accounts:5100'
+      - ORDERS_URL='http://orders:6100'
+      - STOCKS_URL='http://stocks:7100'
+      - WALLETS_URL='http://wallets:8100'
       - MYSQL_HOST=stocks_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
@@ -87,6 +121,12 @@ services:
     depends_on:
       - wallets_db
     environment:
+      - AUTH_URL='http://auth:3100'
+      - CUSTOMER_URL='http://customers:4100'
+      - ACCOUNTS_URL='http://accounts:5100'
+      - ORDERS_URL='http://orders:6100'
+      - STOCKS_URL='http://stocks:7100'
+      - WALLETS_URL='http://wallets:8100'
       - MYSQL_HOST=wallets_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password

@@ -6,12 +6,12 @@ const cors = require('cors');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 10000;
-const AUTH_URL = process.env.AUTH_URL || 'http://localhost:3100/';
-const CUSTOMER_URL = process.env.CUSTOMER_URL || 'http://localhost:4100/';
-const ACCOUNTS_URL = process.env.ACCOUNTS_URL || 'http://localhost:5100/';
-const ORDERS_URL = process.env.ORDERS_URL || 'http://localhost:6100/';
-const STOCKS_URL = process.env.STOCKS_URL || 'http://localhost:7100/';
-const WALLETS_URL = process.env.WALLETS_URL || 'http://localhost:8100/';
+const AUTH_URL = process.env.AUTH_URL;
+const CUSTOMER_URL = process.env.CUSTOMER_URL;
+const ACCOUNTS_URL = process.env.ACCOUNTS_URL;
+const ORDERS_URL = process.env.ORDERS_URL;
+const STOCKS_URL = process.env.STOCKS_URL;
+const WALLETS_URL = process.env.WALLETS_URL;
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');

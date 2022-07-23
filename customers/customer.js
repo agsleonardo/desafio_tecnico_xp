@@ -3,7 +3,7 @@ const Request = require('./utils/request');
 const customerModel = require('./customer.model');
 require('dotenv').config();
 
-const ACCOUNTS_URL = process.env.ACCOUNTS_URL_PRD || 'http://localhost:5000';
+const ACCOUNTS_URL = process.env.ACCOUNTS_URL || 'http://localhost:5000';
 
 const create = async (req, res) => {
   const { email, username, password } = req.body;
