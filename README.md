@@ -1,6 +1,10 @@
 
 # Desafio Técnico XP
 
+- **Deploy**
+
+[leonaxp.com.br](leonaxp.com.br)
+
 - **Sobre**
 
 Este projeto foi desenvolvido para etapa de **Desafio Técnico** do processo seletivo dos alunos da Turma XP da Trybe.
