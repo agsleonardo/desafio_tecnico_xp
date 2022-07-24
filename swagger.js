@@ -10,16 +10,6 @@ module.exports = {
     version: '1.0.0',
     title: 'Desafio XP',
   },
-  servers: [
-    {
-      url: `${URL_PROD}`,
-      description: 'Produção',
-    },
-    {
-      url: `http://localhost:${PORT}`,
-      description: 'Servidor local',
-    },
-  ],
   basePath: '/v1',
   components: {
     securitySchemes: {
