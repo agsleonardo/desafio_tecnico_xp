@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 const routes = require('./customer.routes');
 
 app.use(logger('dev'));
-const PORT = process.env.PORT || 4100;
+const PORT = process.env.PORT_CUSTOMERS || 4100;
 
 app.use(express.json());
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

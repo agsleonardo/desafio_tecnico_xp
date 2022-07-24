@@ -10,7 +10,7 @@ const allowRequest = require('./middlewares/auth');
 
 const app = express();
 
-const PORT = process.env.PORT || 7100;
+const PORT = process.env.PORT_STOCKS || 7100;
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
