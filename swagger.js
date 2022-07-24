@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const URL_PROD = process.env.URL_PROD || '---';
+const URL_PROD = process.env.URL_PROD || '146.190.15.48';
 const PORT = process.env.PORT || 10000;
 
 module.exports = {
