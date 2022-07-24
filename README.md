@@ -89,7 +89,12 @@ dos comandos assincronamente.
 - [MySQL](https://www.mysql.com/)
 - [NPM](https://www.npmjs.com/)
 
-Instale as dependências, na pasta raiz.
+Instale as dependências principais.
+```bash
+  npm install
+```
+
+Instale as dependências dos microserviços.
 ```bash
   npm run installDeps
 ```
