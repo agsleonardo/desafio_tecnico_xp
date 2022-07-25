@@ -53,7 +53,7 @@ module.exports = {
               'application/json': {
                 schema: {
                   type: 'object',
-                  $ref: '#/definitions/CustomerById',
+                  $ref: '#/definitions/AccountById',
                 },
               },
             },
@@ -874,8 +874,10 @@ module.exports = {
             content: {
               'application/json': {
                 schema: {
-                  type: 'object',
-                  $ref: '#/definitions/CustomerById',
+                  type: 'array',
+                  items:{
+                    $ref: '#/definitions/StockById',
+                  }
                 },
               },
             },
@@ -942,7 +944,7 @@ module.exports = {
               'application/json': {
                 schema: {
                   type: 'object',
-                  $ref: '#/definitions/CustomerById',
+                  $ref: '#/definitions/StockById',
                 },
               },
             },
@@ -1430,25 +1432,6 @@ module.exports = {
         },
       },
     },
-    LoginPayload: {
-      type: 'object',
-      properties: {
-        email: {
-          type: 'string',
-        },
-        password: {
-          type: 'string',
-        },
-      },
-    },
-    LoginOk: {
-      type: 'object',
-      properties: {
-        token: {
-          type: 'string',
-        },
-      },
-    },
     SignUpPayloadModel: {
       type: 'object',
       properties: {
@@ -1485,7 +1468,7 @@ module.exports = {
         },
       },
     },
-    CustomerById: {
+    AccountById: {
       type: 'object',
       properties: {
         id: {
@@ -1495,25 +1478,6 @@ module.exports = {
           type: 'string',
         },
         username: {
-          type: 'string',
-        },
-      },
-    },
-    LoginPayload: {
-      type: 'object',
-      properties: {
-        email: {
-          type: 'string',
-        },
-        password: {
-          type: 'string',
-        },
-      },
-    },
-    LoginOk: {
-      type: 'object',
-      properties: {
-        token: {
           type: 'string',
         },
       },
@@ -1529,20 +1493,6 @@ module.exports = {
         },
         stockQty: {
           type: 'integer',
-        },
-      },
-    },
-    SignUpPayloadOExample: {
-      type: 'object',
-      properties: {
-        email: {
-          type: 'string',
-        },
-        username: {
-          type: 'string',
-        },
-        password: {
-          type: 'string',
         },
       },
     },
@@ -1590,53 +1540,6 @@ module.exports = {
         },
       },
     },
-    LoginPayload: {
-      type: 'object',
-      properties: {
-        email: {
-          type: 'string',
-        },
-        password: {
-          type: 'string',
-        },
-      },
-    },
-    LoginOk: {
-      type: 'object',
-      properties: {
-        token: {
-          type: 'string',
-        },
-      },
-    },
-    SignUpPayloadModel: {
-      type: 'object',
-      properties: {
-        email: {
-          type: 'string',
-        },
-        username: {
-          type: 'string',
-        },
-        password: {
-          type: 'string',
-        },
-      },
-    },
-    SignUpPayloadOExample: {
-      type: 'object',
-      properties: {
-        email: {
-          type: 'string',
-        },
-        username: {
-          type: 'string',
-        },
-        password: {
-          type: 'string',
-        },
-      },
-    },
     SignUpPayloadOk: {
       type: 'object',
       properties: {
@@ -1645,7 +1548,7 @@ module.exports = {
         },
       },
     },
-    CustomerById: {
+    StockById: {
       type: 'object',
       properties: {
         id: {
@@ -1663,25 +1566,6 @@ module.exports = {
         price: {
           type: 'number',
           format: 'double',
-        },
-      },
-    },
-    LoginPayload: {
-      type: 'object',
-      properties: {
-        email: {
-          type: 'string',
-        },
-        password: {
-          type: 'string',
-        },
-      },
-    },
-    LoginOk: {
-      type: 'object',
-      properties: {
-        token: {
-          type: 'string',
         },
       },
     },
