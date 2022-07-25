@@ -6,7 +6,7 @@ const router = require('./auth.routes');
 const swaggerDocs = require('./swagger');
 
 const app = express();
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', '*');
   res.setHeader('Access-Control-Allow-Headers', '*');

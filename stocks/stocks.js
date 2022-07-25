@@ -9,7 +9,7 @@ const getByStockId = async (req, res) => {
   return res.status(200).send(stock);
 };
 
-const getAll = async (req, res) => {
+const getAll = async (_req, res) => {
   const stocks = await model.getAll();
   if (!stocks) {
     return res.status(404).send({ message: 'Nenhuma ação encontrada' });

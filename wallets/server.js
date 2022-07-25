@@ -12,7 +12,7 @@ const app = express();
 
 const PORT = process.env.PORT_WALLETS || 8100;
 
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', '*');
   res.setHeader('Access-Control-Allow-Headers', '*');

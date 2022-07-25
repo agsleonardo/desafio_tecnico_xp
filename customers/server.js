@@ -8,7 +8,7 @@ const allowRequest = require('./middlewares/auth');
 const model = require('./customer.model');
 
 const app = express();
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', '*');
   res.setHeader('Access-Control-Allow-Headers', '*');

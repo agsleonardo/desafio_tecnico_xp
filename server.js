@@ -15,7 +15,7 @@ const ORDERS_URL = process.env.ORDERS_URL;
 const STOCKS_URL = process.env.STOCKS_URL;
 const WALLETS_URL = process.env.WALLETS_URL;
 
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     app.use(cors());

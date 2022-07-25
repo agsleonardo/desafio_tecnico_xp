@@ -35,15 +35,9 @@ const getByAccountId = async (accountId) => {
   return rows;
 };
 
-const updateBalance = async (accountId, amount) => {
-  const rows = await connection.execute('UPDATE Accounts_db.Accounts SET balance = ? WHERE customerId = ?', [amount, accountId]);
-  return rows;
-};
+const updateBalance = async (accountId, amount) => connection.execute('UPDATE Accounts_db.Accounts SET balance = ? WHERE customerId = ?', [amount, accountId]);
 
-const create = async (customerId, balance) => {
-  const rows = await connection.execute('INSERT INTO Accounts_db.Accounts (customerId, balance) VALUES (?, ?)', [customerId, balance]);
-  return rows;
-};
+const create = async (customerId, balance) => connection.execute('INSERT INTO Accounts_db.Accounts (customerId, balance) VALUES (?, ?)', [customerId, balance]);
 
 module.exports = {
   recreateDatabase,

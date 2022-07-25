@@ -40,7 +40,4 @@ describe('Testes do Microserviço Orders', () => {
       });
     });
   });
-
-  describe('Testes do método buy', () => {
-  });
 });
