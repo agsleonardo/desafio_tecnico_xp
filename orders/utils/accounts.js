@@ -1,7 +1,7 @@
 const Request = require('./request');
 require('dotenv').config();
 
-const ACCOUNTS_URL = process.env.ACCOUNTS_URL || 'http://localhost:5100';
+const ACCOUNTS_URL = process.env.ACCOUNTS_URL || 'http://localhost:5100/';
 
 const updateBalance = async (accountId, amount, operation) => {
   await Request.put(`${ACCOUNTS_URL}/${operation}`, { accountId, amount })
@@ -10,7 +10,7 @@ const updateBalance = async (accountId, amount, operation) => {
 };
 
 const checkBalanceToAllowWithdraw = async (customerId, amount) => {
-  const { data: accountInfo } = await Request.get(`${ACCOUNTS_URL}/${customerId}`);
+  const { data: accountInfo } = await Request.get(`${ACCOUNTS_URL}${customerId}`);
   return +accountInfo.balance >= +amount;
 };
 
