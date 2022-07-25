@@ -1,14 +1,14 @@
 require('dotenv').config();
 
-const URL_PROD = process.env.URL_PROD || '146.190.15.48';
-const PORT = process.env.PORT || 10000;
-
 module.exports = {
   openapi: '3.0.0',
   info: {
     description: 'Aqui você encontra o catálogo de todos os endpoints relacionados ao sistema desenvolvido para o Desafio XP.',
     version: '1.0.0',
     title: 'Desafio XP',
+    contact: {
+      email: "agsleonardo@hotmail.com"
+    },
   },
   basePath: '/v1',
   components: {
@@ -920,16 +920,16 @@ module.exports = {
             bearerAuth: [],
           },
         ],
-        summary: 'Encontra um cliente pelo ID',
-        description: 'Retorna as informações do cliente com o ID informado',
+        summary: 'Encontra uma ação pelo ID',
+        description: 'Retorna as informações da ação com o ID informado',
         produces: [
           'application/json',
         ],
         parameters: [
           {
-            name: 'customerId',
+            name: 'stockId',
             in: 'path',
-            description: 'ID do cliente',
+            description: 'ID da ação',
             required: true,
             type: 'integer',
             format: 'int64',

@@ -98,16 +98,16 @@ module.exports = {
             bearerAuth: [],
           },
         ],
-        summary: 'Encontra um cliente pelo ID',
+        summary: 'Encontra uma ação pelo ID',
         description: 'Retorna as informações do cliente com o ID informado',
         produces: [
           'application/json',
         ],
         parameters: [
           {
-            name: 'customerId',
+            name: 'stockId',
             in: 'path',
-            description: 'ID do cliente',
+            description: 'ID da ação',
             required: true,
             type: 'integer',
             format: 'int64',
